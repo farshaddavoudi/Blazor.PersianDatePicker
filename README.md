@@ -1,6 +1,6 @@
 # PersianDatePicker
 
-<img src="https://github.com/fericode/blazor-jalali-datepicker/blob/main/screenshot.png">
+<img src="https://github.com/fericode/Blazor.PersianDatePicker/blob/master/screenshot.png">
 
 ## Usage:
 
