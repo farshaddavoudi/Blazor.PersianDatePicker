@@ -18,7 +18,7 @@
 ```
 <InputPersianDatePicker 
                         // Html input element id attribute 
-                        Id="myInputDatePicker" //Required 
+                        **Id="myInputDatePicker"** //Required 
                         @bind-Value="_myComponentPrivateField"
                         // Html input element name attribute
                         Name="myInputName" //Optional
