@@ -7,7 +7,7 @@ Welcome to your new app.
 <SurveyPrompt Title="How is Blazor working for you?" />
 
 <InputPersianDatePicker Id="myInputDatePicker"
-                        @bind-Value="_myComponentPrivateField"
+                        @bind-Value="_variable1"
                         Name="myInputName"
                         Visible="true"
                         ReadOnly="false"
@@ -29,7 +29,7 @@ Welcome to your new app.
                         OnChange="@(() => Console.WriteLine("OK"))" />
 
 <InputPersianDatePicker Id="myInputDatePicker2"
-                        @bind-Value="_myComponentPrivateField"
+                        @bind-Value="_variable2"
                         Name="myInputName"
                         Visible="true"
                         ReadOnly="false"
@@ -53,7 +53,7 @@ Welcome to your new app.
                         OnChange="@(() => Console.WriteLine("OK"))" />
 
 <InputPersianDatePicker Id="myInputDatePicker3"
-                        @bind-Value="_myComponentPrivateField"
+                        @bind-Value="_variable3"
                         Name="myInputName"
                         Visible="true"
                         ReadOnly="false"
@@ -74,7 +74,7 @@ Welcome to your new app.
                         OnChange="@(() => Console.WriteLine("OK"))" />
 
 <InputPersianDatePicker Id="myInputDatePicker4"
-                        @bind-Value="_myComponentPrivateField"
+                        @bind-Value="_variable4"
                         Name="myInputName"
                         Visible="true"
                         ReadOnly="false"
@@ -96,5 +96,8 @@ Welcome to your new app.
 
 @code
 {
-    private string _myComponentPrivateField;
+    private string _variable1;
+    private string _variable2;
+    private string _variable3;
+    private string _variable4;
 }
