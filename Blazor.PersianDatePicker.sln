@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		azure-pipelines.yml = azure-pipelines.yml
 		README.md = README.md
 		ReadmeIdeas.txt = ReadmeIdeas.txt
-		screenshot.png = screenshot.png
+		..\..\Users\lenovo\Desktop\screenshot.png = ..\..\Users\lenovo\Desktop\screenshot.png
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.PersianDatePicker", "src\Blazor.PersianDatePicker\Blazor.PersianDatePicker.csproj", "{E977240E-62E6-4A4A-84E3-C862A9E30BE1}"

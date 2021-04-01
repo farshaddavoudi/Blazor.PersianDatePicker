@@ -1,4 +1,4 @@
-# PersianDatePicker
+﻿# PersianDatePicker
 
 <img src="https://github.com/fericode/Blazor.PersianDatePicker/blob/master/screenshot.png">
 
@@ -15,7 +15,6 @@
 5- Use the component **InputPersianDatePicker** :)
 
 ## Options:
-
 
 ```
 <InputPersianDatePicker 
@@ -80,8 +79,10 @@
 
 ## Performance:
 
-   * **js size: 33 KB** => gzipped (IIS server uses compressed gzip files out of the box (as default) for Blazor Web Assembly Hosted applications. For Blazor Standalone app, though, some manual steps is required)
+   * **js size: 35 KB** => gzipped **
 
-   * **css size: 3 KB** => gzipped
+   * **css size: 5 KB** => gzipped **
 
-   * **dll size: 14 KB**
+   * **dll size: 9 KB =>‌ gzipped **
+
+   - IIS server uses compressed gzip files out of the box (as default) for Blazor Web Assembly Hosted applications. For Blazor Standalone app, though, some manual steps is required
