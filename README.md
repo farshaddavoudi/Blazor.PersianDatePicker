@@ -1,26 +1,41 @@
-# Blazor Jalali DatePicker
+# PersianDatePicker
 
 <img src="https://github.com/fericode/blazor-jalali-datepicker/blob/main/screenshot.png">
 
 ## Usage:
 
-1- Install **BlazorJalaliDatePicker** from Nuget
+1- Install **Blazor.PersianDatePicker** from Nuget
 
-2- Add `<script src="_content/BlazorJalaliDatePicker/jalali-datepicker.min.js" type="text/javascript"></script>` to your **index.html** or **_Host.cshtml**
+2- Add `<script src="_content/Blazor.PersianDatePicker/datepicker.min.js" type="text/javascript"></script>` to your **index.html** or **_Host.cshtml**
 
-3- Add `<link href="_content/BlazorJalaliDatePicker/jalali-datepicker.css" rel="stylesheet" />` to your **index.html** or **_Host.cshtml**
+3- Add `<link href="_content/Blazor.PersianDatePicker/datepicker.css" rel="stylesheet" />` to your **index.html** or **_Host.cshtml**
 
-4- Add `@using BlazorJalaliDatePicker` to **_imports.razor**
+4- Add `@using Blazor.PersianDatePicker` to **_imports.razor**
 
 5- Use the component :)
 
 
 ```
-<JalaliDatePicker Id="Id1"
-                  Name="Name1"
-                  CalendarType="Calendar.Jalali"
-                  @bind-Value="@_value1"
-                  OnChange=@(args => OnChange(args)) />
+<InputPersianDatePicker 
+                        // Html input element id attribute 
+                        Id="myInputDatePicker" //Required 
+                        @bind-Value="_myComponentPrivateField"
+                        // Html input element name attribute
+                        Name="myInputName" //Optional
+                        Visible="true"
+                        ReadOnly="false"
+                        PickerAlign="Align.Left"
+                        PickerOffsetTopPositionInPixels="2"
+                        InitialValue="false"
+                        CalendarType="Calendar.DualModeJalaliDefault"
+                        DigitType="DigitType.BasedOnCalendar"
+                        DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
+                        MinDateSetOnToday="true"
+                        Placeholder="Select date"
+                        CssClass="form-control"
+                        Style="border:1px solid red; width:50%"
+                        Theme="PickerTheme.Default"
+                        OnChange="@(() => Console.WriteLine("OK"))" />
 
 ```
 
