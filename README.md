@@ -18,23 +18,49 @@
 ```
 <InputPersianDatePicker 
                         // Html input element id attribute 
-                        **Id="myInputDatePicker"** //Required 
+                        Id="myInputDatePicker" //Required 
+
                         @bind-Value="_myComponentPrivateField"
+
                         // Html input element name attribute
                         Name="myInputName" //Optional
-                        Visible="true"
-                        ReadOnly="false"
-                        PickerAlign="Align.Left"
-                        PickerOffsetTopPositionInPixels="2"
-                        InitialValue="false"
-                        CalendarType="Calendar.DualModeJalaliDefault"
-                        DigitType="DigitType.BasedOnCalendar"
+
+                        // Control visibility of input
+                        – Visible="true" //Default: true
+
+                        // ReadOnly make input disabled. Meaning only showing value and picker popup won't open
+                        ReadOnly="false" //Default: false
+
+                        // Picker align relative to input
+                        // Options: Align.Right | Align.Left
+                        PickerAlign="Align.Right" //Default: Align.Right
+
+                        // Can be used in changing vertical position of picker popup relative to input
+                        PickerOffsetTopPositionInPixels="2" //Default: 2
+
+                        // Initial value for input set on today
+                        InitialValue="false" //Default: false
+
+                        // Calendar type for date picker including Dual, Single, etc
+                        // Options: Calendar.DualModeJalaliDefault | Calendar.DualModeMiladiDefault | Calendar.SingleModeJalali | Calendar.SingleModeMiladi
+                        CalendarType="Calendar.DualModeJalaliDefault" //Default: Calendar.DualModeJalaliDefault
+
+                        // Control the digit type showing in input after selecting by picker
+                        // Optoins: DigitType.BasedOnCalendar | DigitType.Persian | DigitType.Persian
+                        DigitType="DigitType.BasedOnCalendar" //Default: DigitType.BasedOnCalendar
+
                         DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
+
                         MinDateSetOnToday="true"
+
                         Placeholder="Select date"
+
                         CssClass="form-control"
+
                         Style="border:1px solid red; width:50%"
+
                         Theme="PickerTheme.Default"
+
                         OnChange="@(() => Console.WriteLine("OK"))" />
 
 ```
