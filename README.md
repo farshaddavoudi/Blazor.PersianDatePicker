@@ -20,13 +20,14 @@
                         // Html input element id attribute 
                         Id="myInputDatePicker" //Required 
 
-                        @bind-Value="_myComponentPrivateField"
+                        // Bind input value to local variable or dto etc
+                        @bind-Value="_myComponentField"
 
                         // Html input element name attribute
                         Name="myInputName" //Optional
 
                         // Control visibility of input
-                        – Visible="true" //Default: true
+                        Visible="true" //Default: true
 
                         // ReadOnly make input disabled. Meaning only showing value and picker popup won't open
                         ReadOnly="false" //Default: false
@@ -46,21 +47,29 @@
                         CalendarType="Calendar.DualModeJalaliDefault" //Default: Calendar.DualModeJalaliDefault
 
                         // Control the digit type showing in input after selecting by picker
-                        // Optoins: DigitType.BasedOnCalendar | DigitType.Persian | DigitType.Persian
+                        // Options: DigitType.BasedOnCalendar | DigitType.Persian | DigitType.Persian
                         DigitType="DigitType.BasedOnCalendar" //Default: DigitType.BasedOnCalendar
 
-                        DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
+                        // Format of date to show in input after selecting by picker, e.g. 1400/01/01 or 1400-01-01
+                        // Options: DateFormat.yyyy_slash_MM_slash_dd | DateFormat.yyyy_dash_MM_dash_dd
+                        DateFormat="DateFormat.yyyy_slash_MM_slash_dd" //Default: DateFormat.yyyy_slash_MM_slash_dd
 
-                        MinDateSetOnToday="true"
+                        // Prevent user select date before today
+                        MinDateSetOnToday="true" //Default: true
 
+                        // Input placeholder
                         Placeholder="Select date"
 
+                        // CSS class for input element
                         CssClass="form-control"
 
+                        // Inline styles for input element
                         Style="border:1px solid red; width:50%"
 
+                        // Choose a theme for changing look and feel of picker
                         Theme="PickerTheme.Default"
 
+                        // Input onchange event
                         OnChange="@(() => Console.WriteLine("OK"))" />
 
 ```
