@@ -8,7 +8,7 @@ variables:
   BuildConfiguration: 'Release'
   BuildPlatform: 'any cpu'
   PathToBuildProjects: '**/*.csproj'
-  PathToNugetProjects: '**/BlazorJalaliDatePicker.csproj' 
+  PathToNugetProjects: '**/Blazor.PersianDatePicker.csproj' 
 
 steps:
     #task: Use .NET Core sdk 5.x
@@ -53,7 +53,7 @@ steps:
     targetType: 'inline'
     script: 'nuget push $(Build.ArtifactStagingDirectory)\*.nupkg -ApiKey $env:Api_Key -Source https://api.nuget.org/v3/index.json -SkipDuplicate'
   env:
-    Api_Key: $(NugetApiKey)
+    Api_Key: $(FeriApiKey)
 
     #task: Publish Artifact
 - task: PublishBuildArtifacts@1
