@@ -79,10 +79,10 @@
 
 ## Performance:
 
-   * **js size: 35 KB** => gzipped **
+   * **js size: 35 KB** => gzipped 
 
-   * **css size: 5 KB** => gzipped **
+   * **css size: 5 KB** => gzipped 
 
-   * **dll size: 9 KB** =>‌ gzipped **
+   * **dll size: 9 KB** =>‌ gzipped 
 
    - IIS server uses compressed gzip files out of the box (as default) for Blazor Web Assembly Hosted applications. For Blazor Standalone app, though, some manual steps is required
