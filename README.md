@@ -85,7 +85,7 @@
 
    * **dll size: 9 KB** =>‌ gzipped 
 
-   - IIS server uses compressed gzip files out of the box (as default) for Blazor Web Assembly Hosted applications. For Blazor Standalone app, though, some manual steps is required. [More info](https://docs.microsoft.com/en-us/aspnet/core/blazor/host-and-deploy/webassembly?view=aspnetcore-5.0#compression)
+   – IIS server uses compressed gzip files out of the box (as default) for Blazor Web Assembly Hosted applications. For Blazor Standalone app, though, some manual steps is required. [More info](https://docs.microsoft.com/en-us/aspnet/core/blazor/host-and-deploy/webassembly?view=aspnetcore-5.0#compression)
 
 
 ## Special Thanks:
