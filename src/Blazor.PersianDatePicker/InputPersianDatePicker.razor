@@ -1,0 +1,317 @@
+﻿
+@if (Visible)
+{
+    <input id="@Id"
+           name="@Name"
+           readonly="@ReadOnly"
+           style="@Style"
+           class="@_internalCssClass @CssClass"
+           placeholder="@Placeholder"
+           autocomplete="off"
+           maxlength="10"
+           value="@Value"
+           @onchange="@Change" />
+}
+
+
+@code
+{
+#nullable enable
+
+    private string? _internalCssClass;
+
+    public FieldIdentifier FieldIdentifier { get; private set; }
+
+    private string? _value;
+
+    private bool _isJalaliCurrentCalendarType;
+
+    [CascadingParameter]
+    public EditContext? EditContext { get; set; }
+
+    [Parameter]
+    public virtual string? Value
+    {
+        get => _value;
+        set
+        {
+            if (!EqualityComparer<string>.Default.Equals(value, _value))
+            {
+                _value = value;
+            }
+        }
+    }
+
+    [Parameter]
+    public EventCallback<string> ValueChanged { get; set; }
+
+    /// <summary>
+    /// Html input element id attribute (Required)
+    /// </summary>
+    [Parameter]
+    public string? Id { get; set; }
+
+    /// <summary>
+    /// Html input element name attribute (Optional)
+    /// </summary>
+    [Parameter]
+    public string? Name { get; set; }
+
+    /// <summary>
+    /// Control visibility of input
+    /// </summary>
+    [Parameter]
+    public bool Visible { get; set; } = true;
+
+    /// <summary>
+    /// ReadOnly make input disabled. Meaning only showing value and picker popup won't open
+    /// </summary>
+    [Parameter]
+    public bool ReadOnly { get; set; }
+
+    /// <summary>
+    /// Picker align relative to input
+    /// </summary>
+    [Parameter]
+    public Align PickerAlign { get; set; } = Align.Right;
+
+    /// <summary>
+    /// Can be used in changing vertical position of picker popup relative to input
+    /// </summary>
+    [Parameter]
+    public double PickerOffsetTopPositionInPixels { get; set; } = 2;
+
+    /// <summary>
+    /// Initial value for input set on today
+    /// </summary>
+    [Parameter]
+    public bool InitialValue { get; set; }
+
+    /// <summary>
+    /// Calendar type for date picker including Dual, Single, etc
+    /// </summary>
+    [Parameter]
+    public Calendar CalendarType { get; set; } = Calendar.DualModeJalaliDefault;
+
+    /// <summary>
+    /// Control the digit type showing in input after selecting by picker
+    /// </summary>
+    [Parameter]
+    public DigitType DigitType { get; set; } = DigitType.BasedOnCalendar;
+
+    /// <summary>
+    /// Format of date to show in input after selecting by picker
+    /// </summary>
+    [Parameter]
+    public DateFormat DateFormat { get; set; } = DateFormat.yyyy_slash_MM_slash_dd;
+
+    /// <summary>
+    /// Prevent user select date before today
+    /// </summary>
+    [Parameter]
+    public bool MinDateSetOnToday { get; set; } = true;
+
+    [Parameter]
+    public string? Placeholder { get; set; }
+
+    /// <summary>
+    /// CSS class for input element
+    /// </summary>
+    [Parameter]
+    public string? CssClass { get; set; }
+
+    /// <summary>
+    /// Inline styles for input element
+    /// </summary>
+    [Parameter]
+    public string? Style { get; set; }
+
+    /// <summary>
+    /// Choose a theme for changing look and feel of picker
+    /// </summary>
+    [Parameter]
+    public PickerTheme Theme { get; set; } = PickerTheme.Default;
+
+    [Parameter]
+    public Expression<Func<string>>? ValueExpression { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnChange { get; set; }
+
+    [Inject] private IJSRuntime? JsRuntime { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (string.IsNullOrEmpty(Id))
+            throw new NullReferenceException("Please specify the Id property for PersianDatePicker component. It is required");
+
+        if (CalendarType == Calendar.DualModeJalaliDefault || CalendarType == Calendar.SingleModeJalali)
+            _isJalaliCurrentCalendarType = true;
+
+        else
+            _isJalaliCurrentCalendarType = false;
+
+        if (InitialValue)
+        {
+            var dt = DateTime.Now;
+
+            _value = _isJalaliCurrentCalendarType
+                ? GetPersianDateFromGregorianDate(dt)
+                : dt.ToString(DateFormat.GetCSharpFormat());
+
+            ModifyValueDigit();
+
+            await OnValueChanged();
+        }
+
+        _internalCssClass = ReadOnly ? "datepicker-disabled" : "blazor-datepicker";
+
+        await base.OnInitializedAsync();
+    }
+
+    public override Task SetParametersAsync(ParameterView parameters)
+    {
+        var result = base.SetParametersAsync(parameters);
+
+        if (EditContext != null && ValueExpression != null && FieldIdentifier.Model != EditContext.Model)
+        {
+            FieldIdentifier = FieldIdentifier.Create(ValueExpression);
+            EditContext.OnValidationStateChanged += ValidationStateChanged;
+        }
+
+        return result;
+    }
+
+    private void ValidationStateChanged(object? sender, ValidationStateChangedEventArgs e)
+    {
+        StateHasChanged();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var calendarType = CalendarType == Calendar.SingleModeJalali || CalendarType == Calendar.DualModeJalaliDefault
+                ? "persian"
+                : "gregorian";
+
+            bool enableSwitchCalendar = CalendarType == Calendar.DualModeJalaliDefault || CalendarType == Calendar.DualModeMiladiDefault;
+
+            bool? hasExplicitDigitType = DigitType != DigitType.BasedOnCalendar;
+
+            string digitType = "float";
+
+            if (DigitType == DigitType.Persian)
+                digitType = "fa";
+
+            else if (DigitType == DigitType.English)
+                digitType = "en";
+
+            var minDate = MinDateSetOnToday ? "today" : null;
+
+            await JsRuntime!.InvokeVoidAsync("blazorReady",
+                DotNetObjectReference.Create(this),
+                Id!,
+                calendarType,
+                enableSwitchCalendar,
+                hasExplicitDigitType,
+                digitType,
+                InitialValue,
+                DateFormat.ToDisplayName()!,
+                minDate ?? string.Empty,
+                PickerAlign.ToString().ToLower(),
+                PickerOffsetTopPositionInPixels,
+                Theme.ToDisplayName()!);
+
+            await base.OnAfterRenderAsync(true);
+        }
+
+        await base.OnAfterRenderAsync(false);
+    }
+
+    protected async Task Change(ChangeEventArgs args)
+    {
+        Value = $"{args.Value}";
+
+        await ValueChanged.InvokeAsync(Value);
+
+        EditContext?.NotifyFieldChanged(FieldIdentifier);
+
+        await OnChange.InvokeAsync(Value);
+    }
+
+    [JSInvokable]
+    public async Task SetDate(long? timestamp, string elementId, bool switchingCalendar = false)
+    {
+        if (elementId != Id)
+            return;
+
+        if (timestamp != null)
+        {
+            var dt = new DateTime(1970, 1, 1, 0, 0, 0, 0)
+                .AddSeconds(Math.Round((long)timestamp / 1000d)).ToLocalTime();
+
+            _value = _isJalaliCurrentCalendarType
+                ? GetPersianDateFromGregorianDate(dt)
+                : dt.ToString(DateFormat.GetCSharpFormat());
+        }
+
+        if (switchingCalendar)
+        {
+            _isJalaliCurrentCalendarType = !_isJalaliCurrentCalendarType;
+
+            if (_isJalaliCurrentCalendarType)
+            {
+                // Change from en to fa: 2021/04/03 => 1400/05/02
+                var dt = Convert.ToDateTime(_value);
+
+                _value = GetPersianDateFromGregorianDate(dt);
+            }
+            else
+            {
+                // Change from fa to en: 1400/05/05 => 2021/01/05
+                // Convert to Miladi
+                if (_value != null)
+                {
+                    DateTime dt = DateTime.Parse(_value, new CultureInfo("fa-IR"));
+
+                    // Get Date
+                    _value = dt.ToString(DateFormat.GetCSharpFormat());
+                }
+            }
+        }
+
+        ModifyValueDigit();
+
+        await OnValueChanged();
+    }
+
+    private void ModifyValueDigit()
+    {
+        if (DigitType == DigitType.Persian)
+            _value = _value?.EnglishToPersianDigits();
+
+        else if (DigitType == DigitType.English)
+            _value = _value?.PersianToEnglishDigits();
+
+        else if (DigitType == DigitType.BasedOnCalendar)
+            _value = _isJalaliCurrentCalendarType ? _value?.EnglishToPersianDigits() : _value?.PersianToEnglishDigits();
+    }
+
+    private async Task OnValueChanged()
+    {
+        await ValueChanged.InvokeAsync(_value);
+
+        EditContext?.NotifyFieldChanged(FieldIdentifier);
+
+        await OnChange.InvokeAsync(Value);
+    }
+
+    private string GetPersianDateFromGregorianDate(DateTime dt)
+    {
+        PersianCalendar pc = new PersianCalendar();
+
+        return $"{pc.GetYear(dt):D2}{DateFormat.GetSeparator()}{pc.GetMonth(dt):D2}{DateFormat.GetSeparator()}{pc.GetDayOfMonth(dt):D2}";
+    }
+
+}

@@ -1,0 +1,32 @@
+﻿@page "/"
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+
+<InputPersianDatePicker Id="myInputDatePicker"
+                        @bind-Value="_myComponentPrivateField"
+                        Name="myInputName"
+                        Visible="true"
+                        ReadOnly="false"
+                        PickerOffsetTopPositionInPixels="2"
+                        InitialValue="false"
+                        CalendarType="Calendar.DualModeJalaliDefault"
+                        DigitType="DigitType.BasedOnCalendar"
+                        DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
+                        MinDateSetOnToday="true"
+                        Placeholder="Select date"
+                        CssClass="form-control"
+                        Style="border:1px solid red; width:50%"
+                        Theme="PickerTheme.Default"
+                        OnChange="@(() => Console.WriteLine("OK"))" />
+
+
+<label style="float: right; font-size: 25px; font-weight:bold"> @_myComponentPrivateField </label>
+
+@code
+{
+    private string _myComponentPrivateField;
+}

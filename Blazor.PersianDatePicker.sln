@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31129.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{B0B391F9-B668-4814-BAE5-1A2EA1AEEB81}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{42A1C301-1AB0-484F-82A7-A40B47318800}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		azure-pipelines.yml = azure-pipelines.yml
+		README.md = README.md
+		ReadmeIdeas.txt = ReadmeIdeas.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.PersianDatePicker", "src\Blazor.PersianDatePicker\Blazor.PersianDatePicker.csproj", "{E977240E-62E6-4A4A-84E3-C862A9E30BE1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BlazorServer", "BlazorServer", "{58B7F186-4B0A-4525-ACD3-AA317D33B5A0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BlazorWebAssembly", "BlazorWebAssembly", "{55701F81-7133-41DA-9CE0-45D0F4E41B72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorServer", "samples\BlazorServer\BlazorServer.csproj", "{41AE677B-E710-4DB0-B335-86D88955244C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E977240E-62E6-4A4A-84E3-C862A9E30BE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E977240E-62E6-4A4A-84E3-C862A9E30BE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E977240E-62E6-4A4A-84E3-C862A9E30BE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E977240E-62E6-4A4A-84E3-C862A9E30BE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41AE677B-E710-4DB0-B335-86D88955244C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41AE677B-E710-4DB0-B335-86D88955244C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41AE677B-E710-4DB0-B335-86D88955244C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41AE677B-E710-4DB0-B335-86D88955244C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{58B7F186-4B0A-4525-ACD3-AA317D33B5A0} = {B0B391F9-B668-4814-BAE5-1A2EA1AEEB81}
+		{55701F81-7133-41DA-9CE0-45D0F4E41B72} = {B0B391F9-B668-4814-BAE5-1A2EA1AEEB81}
+		{41AE677B-E710-4DB0-B335-86D88955244C} = {58B7F186-4B0A-4525-ACD3-AA317D33B5A0}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9FFDD00E-C415-4FD6-95CB-18A9D79B2F32}
+	EndGlobalSection
+EndGlobal
