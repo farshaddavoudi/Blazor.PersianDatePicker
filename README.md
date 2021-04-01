@@ -67,6 +67,8 @@
                         Style="border:1px solid red; width:50%"
 
                         // Choose a theme for changing look and feel of picker
+                        // Options: PickerTheme.Default | PickerTheme.Dark | PickerTheme.Blue | PickerTheme.Cheerup | PickerTheme.RedBlack
+                        // Themes can be seen in the image
                         Theme="PickerTheme.Default"
 
                         // Input onchange event
