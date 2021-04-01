@@ -11,8 +11,8 @@ Welcome to your new app.
                         Name="myInputName"
                         Visible="true"
                         ReadOnly="false"
-                        PickerAlign="Align.Left"
-                        PickerOffsetTopPositionInPixels="2"
+                        PickerAlign="Align.Right"
+                        PickerOffsetTopPositionInPixels="-5"
                         InitialValue="false"
                         CalendarType="Calendar.DualModeJalaliDefault"
                         DigitType="DigitType.BasedOnCalendar"
@@ -20,12 +20,79 @@ Welcome to your new app.
                         MinDateSetOnToday="true"
                         Placeholder="Select date"
                         CssClass="form-control"
-                        Style="border:1px solid red; width:50%"
+                        Style="        border: 1px solid red;
+        margin-left:20px;
+        width: 20%;
+        float: right
+"
                         Theme="PickerTheme.Default"
                         OnChange="@(() => Console.WriteLine("OK"))" />
 
+<InputPersianDatePicker Id="myInputDatePicker2"
+                        @bind-Value="_myComponentPrivateField"
+                        Name="myInputName"
+                        Visible="true"
+                        ReadOnly="false"
+                        PickerAlign="Align.Left"
+                        PickerOffsetTopPositionInPixels="25"
+                        InitialValue="false"
+                        CalendarType="Calendar.DualModeMiladiDefault"
+                        DigitType="DigitType.BasedOnCalendar"
+                        DateFormat="DateFormat.yyyy_dash_MM_dash_dd"
+                        MinDateSetOnToday="true"
+                        Placeholder="Select date"
+                        CssClass="form-control"
+                        Style="        border: 1px solid purple;
 
-<label style="float: right; font-size: 25px; font-weight:bold"> @_myComponentPrivateField </label>
+                                         margin-left:20px;
+
+        width: 20%;
+        float: right
+"
+                        Theme="PickerTheme.Blue"
+                        OnChange="@(() => Console.WriteLine("OK"))" />
+
+<InputPersianDatePicker Id="myInputDatePicker3"
+                        @bind-Value="_myComponentPrivateField"
+                        Name="myInputName"
+                        Visible="true"
+                        ReadOnly="false"
+                        PickerAlign="Align.Left"
+                        PickerOffsetTopPositionInPixels="0"
+                        InitialValue="false"
+                        CalendarType="Calendar.SingleModeJalali"
+                        DigitType="DigitType.BasedOnCalendar"
+                        DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
+                        MinDateSetOnToday="true"
+                        Placeholder="انتخاب تاریخ"
+                        CssClass="form-control"
+                        Style="  text-align: right;      border: 1px solid blue;
+        margin-left: 20px;
+        width: 20%;
+        float: right"
+                        Theme="PickerTheme.Cheerup"
+                        OnChange="@(() => Console.WriteLine("OK"))" />
+
+<InputPersianDatePicker Id="myInputDatePicker4"
+                        @bind-Value="_myComponentPrivateField"
+                        Name="myInputName"
+                        Visible="true"
+                        ReadOnly="false"
+                        PickerAlign="Align.Right"
+                        PickerOffsetTopPositionInPixels="1"
+                        InitialValue="false"
+                        CalendarType="Calendar.SingleModeMiladi"
+                        DigitType="DigitType.BasedOnCalendar"
+                        DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
+                        MinDateSetOnToday="true"
+                        Placeholder="Select date"
+                        CssClass="form-control"
+                        Style="border:1px solid green; width:20%; float:right"
+                        Theme="PickerTheme.RedBlack"
+                        OnChange="@(() => Console.WriteLine("OK"))" />
+
+
+@*<label style="float: right; font-size: 25px; font-weight:bold"> @_myComponentPrivateField </label>*@
 
 @code
 {
