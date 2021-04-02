@@ -48,7 +48,7 @@
                         CalendarType="Calendar.DualModeJalaliDefault" //Default: Calendar.DualModeJalaliDefault
 
                         // Control the digit type showing in input after selecting by picker
-                        // Options: DigitType.BasedOnCalendar | DigitType.Persian | DigitType.Persian
+                        // Options: DigitType.BasedOnCalendar | DigitType.Persian | DigitType.English
                         DigitType="DigitType.BasedOnCalendar" //Default: DigitType.BasedOnCalendar
 
                         // Format of date to show in input after selecting by picker, e.g. 1400/01/01 or 1400-01-01
