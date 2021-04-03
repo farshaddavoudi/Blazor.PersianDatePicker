@@ -30,12 +30,19 @@
                         // Control visibility of input
                         Visible="true" //Default: true
 
-                        // ReadOnly make input disabled. Meaning only showing value and picker popup won't open
-                        ReadOnly="false" //Default: false
+                        // Disabled make input disabled. Meaning only showing value and picker popup won't open
+                        Disabled="false" //Default: false
 
                         // Picker align relative to input
                         // Options: Align.Right | Align.Left
                         PickerAlign="Align.Right" //Default: Align.Right
+
+                        // Show calendar icon on input
+                        ShowCalendarIcon="true" //Default: true
+
+                        // Calendar icon position relative to input
+                        // Options: IconPosition.BasedOnAlign | IconPosition.Left | IconPosition.Right
+                        CalendarIconPosition="IconPosition.BasedOnAlign" //Default: IconPosition.BasedOnAlign
 
                         // Can be used in changing vertical position of picker popup relative to input
                         PickerOffsetTopPositionInPixels="2" //Default: 2
@@ -48,7 +55,7 @@
                         CalendarType="Calendar.DualModeJalaliDefault" //Default: Calendar.DualModeJalaliDefault
 
                         // Control the digit type showing in input after selecting by picker
-                        // Options: DigitType.BasedOnCalendar | DigitType.Persian | DigitType.Persian
+                        // Options: DigitType.BasedOnCalendar | DigitType.Persian | DigitType.English
                         DigitType="DigitType.BasedOnCalendar" //Default: DigitType.BasedOnCalendar
 
                         // Format of date to show in input after selecting by picker, e.g. 1400/01/01 or 1400-01-01

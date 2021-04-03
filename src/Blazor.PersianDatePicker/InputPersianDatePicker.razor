@@ -3,9 +3,9 @@
 {
     <input id="@Id"
            name="@Name"
-           readonly="@ReadOnly"
+           readonly="@Disabled"
            style="@Style"
-           class="@_internalCssClass @CssClass"
+           class="@_internalCssClass @_iconCssClass @CssClass"
            placeholder="@Placeholder"
            autocomplete="off"
            maxlength="10"
@@ -19,6 +19,8 @@
 #nullable enable
 
     private string? _internalCssClass;
+
+    private string? _iconCssClass;
 
     public FieldIdentifier FieldIdentifier { get; private set; }
 
@@ -64,16 +66,28 @@
     public bool Visible { get; set; } = true;
 
     /// <summary>
-    /// ReadOnly make input disabled. Meaning only showing value and picker popup won't open
+    /// Disabled make input disabled. Meaning only showing value and picker popup won't open
     /// </summary>
     [Parameter]
-    public bool ReadOnly { get; set; }
+    public bool Disabled { get; set; }
 
     /// <summary>
     /// Picker align relative to input
     /// </summary>
     [Parameter]
     public Align PickerAlign { get; set; } = Align.Right;
+
+    /// <summary>
+    /// Show calendar icon on input
+    /// </summary>
+    [Parameter]
+    public bool ShowCalendarIcon { get; set; } = true;
+
+    /// <summary>
+    /// Calendar icon position relative to input
+    /// </summary>
+    [Parameter]
+    public IconPosition CalendarIconPosition { get; set; } = IconPosition.BasedOnAlign;
 
     /// <summary>
     /// Can be used in changing vertical position of picker popup relative to input
@@ -151,6 +165,25 @@
         else
             _isJalaliCurrentCalendarType = false;
 
+        if (!ShowCalendarIcon)
+            _iconCssClass = "";
+
+        else
+        {
+            if (CalendarIconPosition == IconPosition.Left)
+                _iconCssClass = "persian-datepicker-left-icon";
+
+            else if (CalendarIconPosition == IconPosition.Right)
+                _iconCssClass = "persian-datepicker-right-icon";
+
+            else
+            {
+                _iconCssClass = PickerAlign == Align.Right
+                    ? "persian-datepicker-left-icon"
+                    : "persian-datepicker-right-icon";
+            }
+        }
+
         if (InitialValue)
         {
             var dt = DateTime.Now;
@@ -164,7 +197,7 @@
             await OnValueChanged();
         }
 
-        _internalCssClass = ReadOnly ? "datepicker-disabled" : "blazor-datepicker";
+        _internalCssClass = Disabled ? "datepicker-disabled" : "blazor-datepicker";
 
         await base.OnInitializedAsync();
     }
