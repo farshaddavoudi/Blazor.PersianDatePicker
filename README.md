@@ -37,6 +37,13 @@
                         // Options: Align.Right | Align.Left
                         PickerAlign="Align.Right" //Default: Align.Right
 
+                        // Show calendar icon on input
+                        ShowCalendarIcon="true" //Default: true
+
+                        // Calendar icon position relative to input
+                        // Options: IconPosition.BasedOnAlign | IconPosition.Left | IconPosition.Right
+                        CalendarIconPosition="IconPosition.BasedOnAlign" //Default: IconPosition.BasedOnAlign
+
                         // Can be used in changing vertical position of picker popup relative to input
                         PickerOffsetTopPositionInPixels="2" //Default: 2
 
