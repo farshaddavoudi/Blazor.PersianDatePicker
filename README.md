@@ -30,8 +30,8 @@
                         // Control visibility of input
                         Visible="true" //Default: true
 
-                        // ReadOnly make input disabled. Meaning only showing value and picker popup won't open
-                        ReadOnly="false" //Default: false
+                        // Disabled make input disabled. Meaning only showing value and picker popup won't open
+                        Disabled="false" //Default: false
 
                         // Picker align relative to input
                         // Options: Align.Right | Align.Left

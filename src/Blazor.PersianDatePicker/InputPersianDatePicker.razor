@@ -3,7 +3,7 @@
 {
     <input id="@Id"
            name="@Name"
-           readonly="@ReadOnly"
+           readonly="@Disabled"
            style="@Style"
            class="@_internalCssClass @CssClass"
            placeholder="@Placeholder"
@@ -64,10 +64,10 @@
     public bool Visible { get; set; } = true;
 
     /// <summary>
-    /// ReadOnly make input disabled. Meaning only showing value and picker popup won't open
+    /// Disabled make input disabled. Meaning only showing value and picker popup won't open
     /// </summary>
     [Parameter]
-    public bool ReadOnly { get; set; }
+    public bool Disabled { get; set; }
 
     /// <summary>
     /// Picker align relative to input
@@ -164,7 +164,7 @@
             await OnValueChanged();
         }
 
-        _internalCssClass = ReadOnly ? "datepicker-disabled" : "blazor-datepicker";
+        _internalCssClass = Disabled ? "datepicker-disabled" : "blazor-datepicker";
 
         await base.OnInitializedAsync();
     }
