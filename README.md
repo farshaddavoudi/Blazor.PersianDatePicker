@@ -37,7 +37,7 @@
                         // Options: Align.Right | Align.Left
                         PickerAlign="Align.Right" //Default: Align.Right
 
-                        // Show calendar icon on input
+                        // Show calendar icon on text input
                         ShowCalendarIcon="true" //Default: true
 
                         // Calendar icon position relative to input
