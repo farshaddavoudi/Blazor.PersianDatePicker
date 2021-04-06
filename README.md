@@ -84,6 +84,8 @@
 
 ```
 
+*You can add multi instance of InputPersianDatePicker component in a page and all of them works independently without any problem*
+
 ## Performance:
 
    * **js size: 35 KB** => gzipped 
