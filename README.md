@@ -12,7 +12,7 @@
 
 4- Add `@using Blazor.PersianDatePicker` to **_imports.razor**
 
-5- Use the component **InputPersianDatePicker** :)
+5- Use the component **InputPersianDatePicker** 
 
 ## Options:
 
