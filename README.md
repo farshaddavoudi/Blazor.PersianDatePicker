@@ -19,7 +19,7 @@
 ```
 <InputPersianDatePicker 
                         // Html input element id attribute 
-                        Id="myInputDatePicker" //Required 
+                        Id="myInputDatePicker" //Optional
 
                         // Bind input value to local variable or dto etc
                         @bind-Value="_myComponentField"

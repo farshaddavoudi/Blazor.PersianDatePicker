@@ -157,7 +157,7 @@
     protected override async Task OnInitializedAsync()
     {
         if (string.IsNullOrEmpty(Id))
-            throw new NullReferenceException("Please specify the Id property for PersianDatePicker component. It is required");
+            Id = Guid.NewGuid().ToString();
 
         if (CalendarType == Calendar.DualModeJalaliDefault || CalendarType == Calendar.SingleModeJalali)
             _isJalaliCurrentCalendarType = true;
