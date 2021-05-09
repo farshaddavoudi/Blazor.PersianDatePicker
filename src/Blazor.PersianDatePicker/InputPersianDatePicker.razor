@@ -3,7 +3,8 @@
 {
     <input id="@Id"
            name="@Name"
-           readonly="@Disabled"
+           readonly="@ReadOnly"
+           disabled="@Disabled"
            style="@Style"
            class="@_internalCssClass @_iconCssClass @CssClass"
            placeholder="@Placeholder"
@@ -127,6 +128,12 @@
 
     [Parameter]
     public string? Placeholder { get; set; }
+
+     /// <summary>
+    /// Set datepicker readonly
+    /// </summary>
+    [Parameter]
+    public bool ReadOnly { get; set; } = true;
 
     /// <summary>
     /// CSS class for input element

@@ -4,7 +4,7 @@
 
 ## Usage:
 
-1- Install **Blazor.PersianDatePicker** from Nuget
+1- Install **Blazor.PersianDatePicker** from Nuget.org
 
 2- Add `<script src="_content/Blazor.PersianDatePicker/datepicker.min.js" type="text/javascript"></script>` to your **index.html** or **_Host.cshtml**
 
@@ -32,6 +32,9 @@
 
                         // Disabled make input disabled. Meaning only showing value and picker popup won't open
                         Disabled="false" //Default: false
+
+                        // Readonly make input readonly. Meaning only user cannot change the picker value
+                        ReadOnly="true" //Default: true
 
                         // Picker align relative to input
                         // Options: Align.Right | Align.Left
