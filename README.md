@@ -2,6 +2,8 @@
 
 <img src="https://github.com/fericode/Blazor.PersianDatePicker/blob/master/screenshot.png">
 
+<img src="https://github.com/fericode/Blazor.PersianDatePicker/blob/master/screenshot2.png">
+
 ## Usage:
 
 1- Install **Blazor.PersianDatePicker** from Nuget.org
