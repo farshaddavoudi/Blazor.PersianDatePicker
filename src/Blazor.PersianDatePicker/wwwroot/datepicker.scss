@@ -533,7 +533,9 @@
     line-height: 40px;
 }
 
-
+.blazor-datepicker.form-control[readonly] {
+    background-color: white;
+}
 
 /*#endregion*/
 
@@ -2650,14 +2652,14 @@
 
 .persian-datepicker-right-icon {
     background: white url(calendar_icon.png) no-repeat;
-    background-position: calc(100% - 6px) 47%;
+    background-position: calc(100% - 6px) 49%;
     background-size: 22px 60%;
     padding-right: 33px;
 }
 
 .persian-datepicker-left-icon {
     background: white url(calendar_icon.png) no-repeat;
-    background-position: 6px 47%;
+    background-position: 6px 49%;
     background-size: 22px 60%;
     padding-left: 33px;
 }
