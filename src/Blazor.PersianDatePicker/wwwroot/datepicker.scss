@@ -2637,6 +2637,10 @@
         height: 40px;
         line-height: 40px
     }
+
+    .pwt-datepicker-input-element[readonly] {
+        background-color: transparent;
+    }
 }
 
 /*#endregion*/
