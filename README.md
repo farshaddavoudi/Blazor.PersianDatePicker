@@ -33,7 +33,7 @@
                         // Disabled make input disabled. Meaning only showing value and picker popup won't open
                         Disabled="false" //Default: false
 
-                        // Readonly make input readonly. Meaning only user cannot change the picker value
+                        // Readonly make input readonly. Meaning user cannot change the picker value e.g. by typing
                         ReadOnly="true" //Default: true
 
                         // Picker align relative to input
