@@ -2661,3 +2661,36 @@
 }
 
 /*#endregion*/
+
+/*region Input Clear*/
+
+.wrapper {
+    position: relative;
+}
+
+.clear-btn {
+    opacity: 0.6;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 35px;
+    font-size: 25px;
+    cursor: pointer;
+    color: #b3b3b3;
+    text-align: center;
+    line-height: 50px;
+
+    .right {
+        float: right;
+    }
+
+    .left {
+        float: left;
+    }
+}
+
+.clear-btn:hover {
+    cursor: pointer;
+}
+
+/*#endregion*/
