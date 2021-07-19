@@ -2664,8 +2664,15 @@
 
 /*region Input Clear*/
 
-.wrapper {
-    position: relative;
+.datepicker_wrapp {
+    position: relative !important;
+}
+
+.datepicker_wrapp > span {
+    position: absolute;
+    right: 0;
+    top: -5px;
+    cursor: pointer;
 }
 
 .clear-btn {
