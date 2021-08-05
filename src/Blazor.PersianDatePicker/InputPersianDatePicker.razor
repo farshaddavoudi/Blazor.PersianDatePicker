@@ -1,11 +1,10 @@
 ﻿@if (Visible)
 {
-    <div class="datepicker_wrapp">
+    <div class="datepicker_wrapp" style="@Style">
         <input id="@Id"
            name="@Name"
            readonly="@ReadOnly"
            disabled="@Disabled"
-           style="@Style"
            class="@_internalCssClass @_iconCssClass @CssClass"
            placeholder="@Placeholder"
            autocomplete="off"
@@ -179,31 +178,20 @@
         if (!ShowCalendarIcon)
         {
             _iconCssClass = "";
-
-            if (_isJalaliCurrentCalendarType)
-            {
-                _clearBtnCssClass = "clear-btn left";
-            }
-            else
-            {
-                _clearBtnCssClass = "clear-btn right";
-            }
-
-            Console.WriteLine(_clearBtnCssClass + "1");
+            _clearBtnCssClass = "clear-btn right";
         }
-
         else
         {
             if (CalendarIconPosition == IconPosition.Left)
             {
                 _iconCssClass = "persian-datepicker-left-icon";
-                _clearBtnCssClass = "clear-btn right";
+                _clearBtnCssClass = "clear-btn left";
             }
 
             else if (CalendarIconPosition == IconPosition.Right)
             {
                 _iconCssClass = "persian-datepicker-right-icon";
-                _clearBtnCssClass = "clear-btn left";
+                _clearBtnCssClass = "clear-btn right";
             }
 
             else
@@ -211,16 +199,14 @@
                 if (PickerAlign == Align.Right)
                 {
                     _iconCssClass = "persian-datepicker-left-icon";
-                    _clearBtnCssClass = "clear-btn left";
+                    _clearBtnCssClass = "clear-btn right";
                 }
                 else
                 {
                     _iconCssClass = "persian-datepicker-right-icon";
-                    _clearBtnCssClass = "clear-btn right";
+                    _clearBtnCssClass = "clear-btn left";
                 }
             }
-
-            Console.WriteLine(_clearBtnCssClass + "2");
         }
 
         if (InitialValue)

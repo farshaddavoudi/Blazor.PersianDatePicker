@@ -2665,39 +2665,32 @@
 /*region Input Clear*/
 
 .datepicker_wrapp {
+    display: flex;
     position: relative !important;
 }
 
-.datepicker_wrapp > span {
+.clear-btn {
     position: absolute;
-    right: 0;
     top: -5px;
     cursor: pointer;
-}
-
-.clear-btn {
     opacity: 0.6;
-    position: absolute;
-    top: 0;
     height: 100%;
     width: 35px;
     font-size: 25px;
-    cursor: pointer;
     color: #b3b3b3;
     text-align: center;
     line-height: 50px;
 
-    .right {
-        float: right;
+    &.right {
+        right: 0;
     }
 
-    .left {
-        float: left;
+    &.left {
+        left: 0;
     }
 }
 
 .clear-btn:hover {
     cursor: pointer;
 }
-
 /*#endregion*/
