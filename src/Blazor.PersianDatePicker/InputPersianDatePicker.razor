@@ -1,27 +1,30 @@
-﻿
-@if (Visible)
+﻿@if (Visible)
 {
-    <input id="@Id"
+    <div class="datepicker_wrapp" style="@Style">
+        <input id="@Id"
            name="@Name"
            readonly="@ReadOnly"
            disabled="@Disabled"
-           style="@Style"
            class="@_internalCssClass @_iconCssClass @CssClass"
            placeholder="@Placeholder"
            autocomplete="off"
            maxlength="10"
            value="@Value"
            @onchange="@Change" />
+        <span class="@_clearBtnCssClass" onclick="clearInput(@Id)">×</span>
+    </div>
 }
 
 
 @code
 {
-#nullable enable
+    #nullable enable
 
     private string? _internalCssClass;
 
     private string? _iconCssClass;
+
+    private string? _clearBtnCssClass;
 
     public FieldIdentifier FieldIdentifier { get; private set; }
 
@@ -129,7 +132,7 @@
     [Parameter]
     public string? Placeholder { get; set; }
 
-     /// <summary>
+    /// <summary>
     /// Set datepicker readonly
     /// </summary>
     [Parameter]
@@ -173,21 +176,36 @@
             _isJalaliCurrentCalendarType = false;
 
         if (!ShowCalendarIcon)
+        {
             _iconCssClass = "";
-
+            _clearBtnCssClass = "clear-btn right";
+        }
         else
         {
             if (CalendarIconPosition == IconPosition.Left)
+            {
                 _iconCssClass = "persian-datepicker-left-icon";
+                _clearBtnCssClass = "clear-btn left";
+            }
 
             else if (CalendarIconPosition == IconPosition.Right)
+            {
                 _iconCssClass = "persian-datepicker-right-icon";
+                _clearBtnCssClass = "clear-btn right";
+            }
 
             else
             {
-                _iconCssClass = PickerAlign == Align.Right
-                    ? "persian-datepicker-left-icon"
-                    : "persian-datepicker-right-icon";
+                if (PickerAlign == Align.Right)
+                {
+                    _iconCssClass = "persian-datepicker-left-icon";
+                    _clearBtnCssClass = "clear-btn right";
+                }
+                else
+                {
+                    _iconCssClass = "persian-datepicker-right-icon";
+                    _clearBtnCssClass = "clear-btn left";
+                }
             }
         }
 

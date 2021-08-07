@@ -13,17 +13,16 @@
                         PickerAlign="Align.Right"
                         PickerOffsetTopPositionInPixels="0"
                         InitialValue="true"
+                        ShowCalendarIcon="true"
                         CalendarType="Calendar.DualModeJalaliDefault"
                         DigitType="DigitType.BasedOnCalendar"
                         DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
                         MinDateSetOnToday="true"
                         Placeholder="Select date"
                         CssClass="form-control"
-                        Style="font-family: tahoma;
-        margin-left:20px;
+                        Style="margin-left:20px;
         width: 20%;
-        float: right
-"
+        float: right"
                         Theme="PickerTheme.Default"
                         OnChange="@(() => Console.WriteLine("OK"))" />
 
@@ -42,10 +41,8 @@
                         MinDateSetOnToday="true"
                         Placeholder="Select date"
                         CssClass="form-control"
-                        Style="        border: 1px solid purple;
-
-                                         margin-left:20px;
-
+                        Style="border: 1px solid purple;
+        margin-left:20px;
         width: 20%;
         float: right"
                         Theme="PickerTheme.Blue"
@@ -55,7 +52,7 @@
                         @bind-Value="_variable3"
                         Name="myInputName"
                         Visible="true"
-                        Disabled="false"
+                        ShowCalendarIcon="false"
                         PickerAlign="Align.Right"
                         PickerOffsetTopPositionInPixels="0"
                         InitialValue="false"
@@ -65,7 +62,8 @@
                         MinDateSetOnToday="true"
                         Placeholder="انتخاب تاریخ"
                         CssClass="form-control"
-                        Style="  text-align: right;      border: 1px solid blue;
+                        Style="text-align: right;      
+        border: 1px solid blue;
         margin-left: 20px;
         width: 20%;
         float: right"
@@ -89,7 +87,6 @@
                         Style="border:1px solid green; width:20%; float:right"
                         Theme="PickerTheme.RedBlack"
                         OnChange="@(() => Console.WriteLine("OK"))" />
-
 
 @*<label style="float: right; font-size: 25px; font-weight:bold"> @_myComponentPrivateField </label>*@
 

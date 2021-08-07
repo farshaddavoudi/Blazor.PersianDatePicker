@@ -2661,3 +2661,36 @@
 }
 
 /*#endregion*/
+
+/*region Input Clear*/
+
+.datepicker_wrapp {
+    display: flex;
+    position: relative !important;
+}
+
+.clear-btn {
+    position: absolute;
+    top: -5px;
+    cursor: pointer;
+    opacity: 0.6;
+    height: 100%;
+    width: 35px;
+    font-size: 25px;
+    color: #b3b3b3;
+    text-align: center;
+    line-height: 50px;
+
+    &.right {
+        right: 0;
+    }
+
+    &.left {
+        left: 0;
+    }
+}
+
+.clear-btn:hover {
+    cursor: pointer;
+}
+/*#endregion*/
