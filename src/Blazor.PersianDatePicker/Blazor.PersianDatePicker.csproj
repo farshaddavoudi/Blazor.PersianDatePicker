@@ -9,6 +9,7 @@
 
 	<PropertyGroup>
 		<Authors>Farshad Davoudi</Authors>
+		<Title>Blazor.PersianDatePicker</Title>
 		<Company>Bit</Company>
 		<Description>
 			A free Jalali (Persian) and Gregorian (Miladi) dual datepicker library for Blazor applications
@@ -16,6 +17,7 @@
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<!-- Add README.md to nuget package -->
 		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryURL>https://github.com/farshaddavoudi/Blazor.PersianDatePicker</RepositoryURL>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
