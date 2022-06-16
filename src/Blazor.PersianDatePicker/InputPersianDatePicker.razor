@@ -11,7 +11,7 @@
            maxlength="10"
            value="@Value"
            @onchange="@Change" />
-        <span class="@_clearBtnCssClass" onclick="clearInput(@Id)">×</span>
+        <span class="@_clearBtnCssClass" @onclick="@Clear">×</span>
     </div>
 }
 
@@ -161,6 +161,9 @@
 
     [Parameter]
     public EventCallback<string> OnChange { get; set; }
+    
+    [Parameter]
+    public EventCallback OnClear { get; set; }
 
     [Inject] private IJSRuntime? JsRuntime { get; set; }
 
@@ -372,4 +375,12 @@
         return $"{pc.GetYear(dt):D2}{DateFormat.GetSeparator()}{pc.GetMonth(dt):D2}{DateFormat.GetSeparator()}{pc.GetDayOfMonth(dt):D2}";
     }
 
+    private async Task Clear()
+    {
+        await ValueChanged.InvokeAsync(string.Empty);
+
+        EditContext?.NotifyFieldChanged(FieldIdentifier);
+
+        await OnClear.InvokeAsync();
+    }
 }
