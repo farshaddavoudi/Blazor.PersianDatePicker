@@ -87,7 +87,10 @@
                         Theme="PickerTheme.Default"
 
                         // Input onchange event
-                        OnChange="@(() => Console.WriteLine("OK"))" />
+                        OnChange="@(() => Console.WriteLine("OK"))"
+                        
+                        // Input text clear event (by pressing close button)
+                        OnClear="@(() => Console.WriteLine("Cleared"))" />
 
 ```
 
