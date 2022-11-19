@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
-		<Version>2.1.0</Version>
+		<Version>2.1.1</Version>
 		<LangVersion>latest</LangVersion>
 		<NoWarn>$(NoWarn);NU1701;1702;1591;NU1602;CS8609;CS8610;CS8619;CS8632</NoWarn>
 		<Nullable>enable</Nullable>
