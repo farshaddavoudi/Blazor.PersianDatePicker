@@ -278,11 +278,11 @@
                 hasExplicitDigitType,
                 digitType,
                 InitialValue,
-                DateFormat.ToDisplayName()!,
+                DateFormat.ToEnumDisplayName()!,
                 minDate ?? string.Empty,
                 PickerAlign.ToString().ToLower(),
                 PickerOffsetTopPositionInPixels,
-                Theme.ToDisplayName()!);
+                Theme.ToEnumDisplayName()!);
 
             await base.OnAfterRenderAsync(true);
         }

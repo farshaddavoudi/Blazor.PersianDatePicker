@@ -7,7 +7,7 @@ namespace Blazor.PersianDatePicker.Extensions
 {
     public static class EnumExtensions
     {
-        public static string? ToDisplayName(this Enum value, bool showEnumStringIfNoDisplayName = true)
+        public static string? ToEnumDisplayName(this Enum value, bool showEnumStringIfNoDisplayName = true)
         {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
