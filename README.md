@@ -100,10 +100,6 @@ It is compatible and installable on all .NET5, .NET6 and .NET7 Blazor projects
 
 ```
 
-```
-
-```
-
 *You can add multi instance of InputPersianDatePicker component in a page and all of them works independently without any problem*
 
 ## Sample template for fast usage:
