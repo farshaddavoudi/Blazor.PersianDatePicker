@@ -348,6 +348,20 @@
         await OnValueChanged();
     }
 
+    [JSInvokable]
+    public async Task SetToday(string elementId)
+    {
+        var dt = DateTime.Today;
+
+        _value = _isJalaliCurrentCalendarType
+            ? GetPersianDateFromGregorianDate(dt)
+            : dt.ToString(DateFormat.GetCSharpFormat());
+
+        ModifyValueDigit();
+
+        await OnValueChanged();
+    }
+
     private void ModifyValueDigit()
     {
         if (DigitType == DigitType.Persian)
