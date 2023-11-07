@@ -1,10 +1,16 @@
-﻿# PersianDatePicker
+﻿# Blazor.PersianDatePicker
+ 
+[![NuGet Version](https://img.shields.io/nuget/v/Blazor.PersianDatePicker.svg?style=flat)](https://www.nuget.org/packages/Blazor.PersianDatePicker/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://raw.githubusercontent.com/farshaddavoudi/Blazor.PersianDatePicker/master/LICENSE)
 
 <img src="https://github.com/fericode/Blazor.PersianDatePicker/blob/master/screenshot.png">
 
 *After v2.0.0:*
 
 <img src="https://github.com/fericode/Blazor.PersianDatePicker/blob/master/screenshot2.png">
+
+## Compatibility:
+It is compatible and installable on all .NET5, .NET6 and .NET7 Blazor projects
 
 ## Usage:
 
@@ -95,6 +101,28 @@
 ```
 
 *You can add multi instance of InputPersianDatePicker component in a page and all of them works independently without any problem*
+
+## Sample template for fast usage:
+
+```
+<InputPersianDatePicker Id="myInputDatePicker"
+                        @bind-Value="_variable4"
+                        Name="myInputName"
+                        Visible="true"
+                        Disabled="false"
+                        PickerAlign="Align.Right"
+                        PickerOffsetTopPositionInPixels="1"
+                        InitialValue="false"
+                        CalendarType="Calendar.SingleModeJalali"
+                        DigitType="DigitType.BasedOnCalendar"
+                        DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
+                        MinDateSetOnToday="true"
+                        Placeholder="Select date"
+                        CssClass="form-control"
+                        Style="border:1px solid green; width:20%; float:right"
+                        Theme="PickerTheme.RedBlack"
+                        OnChange="@(() => Console.WriteLine("OK"))" />
+```
 
 ## Performance:
 
