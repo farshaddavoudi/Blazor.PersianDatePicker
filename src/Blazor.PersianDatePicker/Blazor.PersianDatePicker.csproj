@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 	<PropertyGroup>
-		<TargetFramework>net5.0</TargetFramework>
-		<Version>2.1.0</Version>
+		<TargetFrameworks>net5.0</TargetFrameworks>
+		<Version>3.0.2</Version>
 		<LangVersion>latest</LangVersion>
 		<NoWarn>$(NoWarn);NU1701;1702;1591;NU1602;CS8609;CS8610;CS8619;CS8632</NoWarn>
 		<Nullable>enable</Nullable>
@@ -9,6 +9,7 @@
 
 	<PropertyGroup>
 		<Authors>Farshad Davoudi</Authors>
+		<Title>Blazor.PersianDatePicker</Title>
 		<Company>Bit</Company>
 		<Description>
 			A free Jalali (Persian) and Gregorian (Miladi) dual datepicker library for Blazor applications
@@ -16,6 +17,7 @@
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<!-- Add README.md to nuget package -->
 		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryURL>https://github.com/farshaddavoudi/Blazor.PersianDatePicker</RepositoryURL>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
@@ -37,7 +39,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.0" />
 		<PackageReference Include="Delegate.SassBuilder" Version="1.4.0" />
 		<PackageReference Include="SourceLink.Embed.AllSourceFiles" Version="2.8.3" PrivateAssets="all" />
 		<PackageReference Include="SourceLink.Copy.PdbFiles" Version="2.8.3" PrivateAssets="All" />
