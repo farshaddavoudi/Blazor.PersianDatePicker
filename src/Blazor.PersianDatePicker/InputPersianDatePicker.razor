@@ -171,7 +171,7 @@
     protected override async Task OnInitializedAsync()
     {
         if (string.IsNullOrEmpty(Id))
-            Id = Guid.NewGuid().ToString();
+            Id = "id" + new Random().Next(1000, 9999);
 
         if (CalendarType == Calendar.DualModeJalaliDefault || CalendarType == Calendar.SingleModeJalali)
             _isJalaliCurrentCalendarType = true;
