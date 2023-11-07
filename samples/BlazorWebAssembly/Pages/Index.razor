@@ -24,7 +24,7 @@
         width: 20%;
         float: right"
                         Theme="PickerTheme.Default"
-                        OnChange="@(() => Console.WriteLine("OK1"))" 
+                        OnChange="@(() => Console.WriteLine($"OK1 - {_variable1}"))"
                         OnClear="@(() => Console.WriteLine("Clear1"))" />
 
 <InputPersianDatePicker Id="myInputDatePicker2"
@@ -47,7 +47,7 @@
         width: 20%;
         float: right"
                         Theme="PickerTheme.Blue"
-                        OnChange="@(() => Console.WriteLine("OK2"))" />
+                        OnChange="@(() => Console.WriteLine($"OK2 - {_variable2}"))" />
 
 <InputPersianDatePicker Id="myInputDatePicker3"
                         @bind-Value="_variable3"
@@ -69,7 +69,7 @@
         width: 20%;
         float: right"
                         Theme="PickerTheme.Cheerup"
-                        OnChange="@(() => Console.WriteLine("OK3"))" />
+                        OnChange="@(() => Console.WriteLine($"OK3 - {_variable3}"))" />
 
 <InputPersianDatePicker Id="myInputDatePicker4"
                         @bind-Value="_variable4"
@@ -87,7 +87,7 @@
                         CssClass="form-control"
                         Style="border:1px solid green; width:20%; float:right"
                         Theme="PickerTheme.RedBlack"
-                        OnChange="@(() => Console.WriteLine("OK4"))" />
+                        OnChange="@(() => Console.WriteLine($"OK4 - {_variable4}"))" />
 
 @*<label style="float: right; font-size: 25px; font-weight:bold"> @_myComponentPrivateField </label>*@
 
