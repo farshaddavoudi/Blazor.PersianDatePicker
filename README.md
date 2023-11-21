@@ -10,7 +10,7 @@
 <img src="https://github.com/fericode/Blazor.PersianDatePicker/blob/master/screenshot2.png">
 
 *Important fix in v3.2.0:*
-- When we set the bound parameter value to some date by code (for example in `OnInitialize` method of our page) and then click on the input, the selected date in the datepicker was always today, not that date. It is resolved now. Thanks to [@EsmaeelAmarloo](https://github.com/EsmaeelAmarloo) for creating the issue.
+- When we set the bound parameter value to some date by code (for example in `OnInitialize` method of our page) and then click on the input, the selected date in the datepicker was always today, not that date. It is resolved now. Thanks to [@EsmaeelAmarloo](https://github.com/EsmaeelAmarloo) for creating [the issue](https://github.com/farshaddavoudi/Blazor.PersianDatePicker/issues/60#issuecomment-1820790657).
 
 ## Compatibility:
 It is compatible and installable on all .NET5, .NET6 and .NET7 Blazor projects
