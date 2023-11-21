@@ -2,7 +2,7 @@
 @if (Visible)
 {
     <div class="datepicker_wrapp" style="@Style">
-        <input id="@Id"
+    <input id="@Id"
            name="@Name"
            readonly="@ReadOnly"
            disabled="@Disabled"
@@ -11,6 +11,7 @@
            autocomplete="off"
            maxlength="10"
            value="@Value"
+           init-value="@Value"
            @onchange="@Change" />
         <span class="@_clearBtnCssClass" @onclick="@Clear">×</span>
     </div>
@@ -104,7 +105,7 @@
     /// Initial value for input set on today
     /// </summary>
     [Parameter]
-    public bool InitialValue { get; set; }
+    public bool InitialValueSetOnToday { get; set; }
 
     /// <summary>
     /// Calendar type for date picker including Dual, Single, etc
@@ -213,7 +214,7 @@
             }
         }
 
-        if (InitialValue)
+        if (InitialValueSetOnToday)
         {
             var dt = DateTime.Now;
 
@@ -278,7 +279,7 @@
                 enableSwitchCalendar,
                 hasExplicitDigitType,
                 digitType,
-                InitialValue,
+                InitialValueSetOnToday,
                 DateFormat.ToEnumDisplayName()!,
                 minDate ?? string.Empty,
                 PickerAlign.ToString().ToLower(),
