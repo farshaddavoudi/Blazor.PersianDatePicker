@@ -61,7 +61,7 @@ It is compatible and installable on all .NET5, .NET6 and .NET7 Blazor projects
                         PickerOffsetTopPositionInPixels="2" //Default: 2
 
                         // Initial value for input set on today
-                        InitialValue="false" //Default: false
+                        InitialValueSetOnToday="false" //Default: false
 
                         // Calendar type for date picker including Dual, Single, etc
                         // Options: Calendar.DualModeJalaliDefault | Calendar.DualModeMiladiDefault | Calendar.SingleModeJalali | Calendar.SingleModeMiladi
@@ -112,7 +112,7 @@ It is compatible and installable on all .NET5, .NET6 and .NET7 Blazor projects
                         Disabled="false"
                         PickerAlign="Align.Right"
                         PickerOffsetTopPositionInPixels="1"
-                        InitialValue="false"
+                        InitialValueSetOnToday="false"
                         CalendarType="Calendar.SingleModeJalali"
                         DigitType="DigitType.BasedOnCalendar"
                         DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
