@@ -12,7 +12,7 @@
                         Visible="true"
                         PickerAlign="Align.Right"
                         PickerOffsetTopPositionInPixels="0"
-                        InitialValue="true"
+                        InitialValueSetOnToday="true"
                         ShowCalendarIcon="true"
                         CalendarType="Calendar.DualModeJalaliDefault"
                         DigitType="DigitType.BasedOnCalendar"
@@ -35,7 +35,7 @@
                         PickerAlign="Align.Left"
                         ShowCalendarIcon="false"
                         PickerOffsetTopPositionInPixels="25"
-                        InitialValue="false"
+                        InitialValueSetOnToday="false"
                         CalendarType="Calendar.DualModeMiladiDefault"
                         DigitType="DigitType.BasedOnCalendar"
                         DateFormat="DateFormat.yyyy_dash_MM_dash_dd"
@@ -56,7 +56,7 @@
                         ShowCalendarIcon="false"
                         PickerAlign="Align.Right"
                         PickerOffsetTopPositionInPixels="0"
-                        InitialValue="false"
+                        InitialValueSetOnToday="false"
                         CalendarType="Calendar.SingleModeJalali"
                         DigitType="DigitType.BasedOnCalendar"
                         DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
@@ -78,7 +78,7 @@
                         Disabled="false"
                         PickerAlign="Align.Right"
                         PickerOffsetTopPositionInPixels="1"
-                        InitialValue="false"
+                        InitialValueSetOnToday="false"
                         CalendarType="Calendar.SingleModeMiladi"
                         DigitType="DigitType.BasedOnCalendar"
                         DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
@@ -88,6 +88,17 @@
                         Style="border:1px solid green; width:20%; float:right"
                         Theme="PickerTheme.RedBlack"
                         OnChange="@(() => Console.WriteLine($"OK4 - {_variable4}"))" />
+                        
+<br />
+<br />
+<br />
+
+<div style="display: flex; border: 1px solid green;justify-content: space-around; padding: 50px">
+    <b> Val1= @_variable1 </b>
+    <b> Val2= @_variable2 </b>
+    <b> Val3= @_variable3 </b>
+    <b> Val4= @_variable4 </b>
+</div>
 
 @*<label style="float: right; font-size: 25px; font-weight:bold"> @_myComponentPrivateField </label>*@
 
@@ -97,4 +108,11 @@
     private string _variable2;
     private string _variable3;
     private string _variable4;
+
+    protected override void OnInitialized()
+    {
+        _variable3 = "۱۴۰۲/۱۱/۱۱";
+
+        base.OnInitialized();
+    }
 }
