@@ -19,9 +19,9 @@ It is compatible and installable on all .NET5, .NET6, .NET7 and .NET8 Blazor pro
 
 1- Install **Blazor.PersianDatePicker** from Nuget.org
 
-2- Add `<script src="_content/Blazor.PersianDatePicker/datepicker.min.js" type="text/javascript"></script>` to your **index.html** or **_Host.cshtml**
+2- Add `<script src="_content/Blazor.PersianDatePicker/datepicker.min.js" type="text/javascript"></script>` to your **index.html** or **_Host.cshtml** or **App.razor** *(in .NET8)*
 
-3- Add `<link href="_content/Blazor.PersianDatePicker/datepicker.css" rel="stylesheet" />` to your **index.html** or **_Host.cshtml**
+3- Add `<link href="_content/Blazor.PersianDatePicker/datepicker.css" rel="stylesheet" />` to your **index.html** or **_Host.cshtml** or **App.razor** *(in .NET8)*
 
 4- Add `@using Blazor.PersianDatePicker` to **_imports.razor**
 
