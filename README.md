@@ -106,8 +106,9 @@ It is compatible and installable on all .NET5, .NET6, .NET7 and .NET8 Blazor pro
 > #### 💡 You can add multi-instances of InputPersianDatePicker components on a page and all of them work independently without any problem
 
 ## Sample template for fast usage:
+#### Copy from here then paste in your project; change some options and you're done.
 
-```
+```razor
 <InputPersianDatePicker Id="myInputDatePicker"
                         @bind-Value="_variable4"
                         Name="myInputName"
