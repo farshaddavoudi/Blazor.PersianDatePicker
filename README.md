@@ -29,81 +29,81 @@ It is compatible and installable on all .NET5, .NET6, .NET7 and .NET8 Blazor pro
 
 ## Options:
 
-```
+```diff
 <InputPersianDatePicker 
-                        // Html input element id attribute 
+#                       // Html input element id attribute 
                         Id="myInputDatePicker" //Optional
 
-                        // Bind input value to local variable or dto etc
+#                       // Bind input value to local variable or dto etc
                         @bind-Value="_myComponentField"
 
-                        // Html input element name attribute
+#                       // Html input element name attribute
                         Name="myInputName" //Optional
 
-                        // Control visibility of input
+#                       // Control visibility of input
                         Visible="true" //Default: true
 
-                        // Disabled make input disabled. This means only showing value and the picker popup won't open
+#                       // Disabled make input disabled. This means only showing value and the picker popup won't open
                         Disabled="false" //Default: false
 
-                        // Readonly make input readonly. This means the user cannot change the picker value e.g. by typing
+#                       // Readonly make input readonly. This means the user cannot change the picker value e.g. by typing
                         ReadOnly="true" //Default: true
 
-                        // Picker'align relative to input
-                        // Options: Align.Right | Align.Left
+#                       // Picker'align relative to input
+#                       // Options: Align.Right | Align.Left
                         PickerAlign="Align.Right" //Default: Align.Right
 
-                        // Show calendar icon on text input
+#                       // Show calendar icon on text input
                         ShowCalendarIcon="true" //Default: true
 
-                        // Calendar icon position relative to input
-                        // Options: IconPosition.BasedOnAlign | IconPosition.Left | IconPosition.Right
+#                       // Calendar icon position relative to input
+#                       // Options: IconPosition.BasedOnAlign | IconPosition.Left | IconPosition.Right
                         CalendarIconPosition="IconPosition.BasedOnAlign" //Default: IconPosition.BasedOnAlign
 
-                        // Can be used in changing the vertical position of the picker popup relative to the input
+#                       // Can be used in changing the vertical position of the picker popup relative to the input
                         PickerOffsetTopPositionInPixels="2" //Default: 2
 
-                        // Initial value for the input set today
+#                       // Initial value for the input set today
                         InitialValueSetOnToday="false" //Default: false
 
-                        // Calendar type for date picker including Dual, Single, etc
-                        // Options: Calendar.DualModeJalaliDefault | Calendar.DualModeMiladiDefault | Calendar.SingleModeJalali | Calendar.SingleModeMiladi
+#                       // Calendar type for date picker including Dual, Single, etc
+#                       // Options: Calendar.DualModeJalaliDefault | Calendar.DualModeMiladiDefault | Calendar.SingleModeJalali | Calendar.SingleModeMiladi
                         CalendarType="Calendar.DualModeJalaliDefault" //Default: Calendar.DualModeJalaliDefault
 
-                        // Control the digit type showing in the input after selecting by the picker
-                        // Options: DigitType.BasedOnCalendar | DigitType.Persian | DigitType.English
+#                       // Control the digit type showing in the input after selecting by the picker
+#                       // Options: DigitType.BasedOnCalendar | DigitType.Persian | DigitType.English
                         DigitType="DigitType.BasedOnCalendar" //Default: DigitType.BasedOnCalendar
 
-                        // Format of date to show in the input after selecting by picker, e.g. 1400/01/01 or 1400-01-01
-                        // Options: DateFormat.yyyy_slash_MM_slash_dd | DateFormat.yyyy_dash_MM_dash_dd
+#                       // Format of date to show in the input after selecting by picker, e.g. 1400/01/01 or 1400-01-01
+#                       // Options: DateFormat.yyyy_slash_MM_slash_dd | DateFormat.yyyy_dash_MM_dash_dd
                         DateFormat="DateFormat.yyyy_slash_MM_slash_dd" //Default: DateFormat.yyyy_slash_MM_slash_dd
 
-                        // Prevent the user from selecting a date before today
+#                       // Prevent the user from selecting a date before today
                         MinDateSetOnToday="true" //Default: true
 
-                        // Input placeholder
+#                       // Input placeholder
                         Placeholder="Select date"
 
-                        // CSS class for input element
+#                       // CSS class for input element
                         CssClass="form-control"
 
-                        // Inline styles for input element
+#                       // Inline styles for input element
                         Style="border:1px solid red; width:50%"
 
-                        // Choose a theme for changing the look and feel of the picker
-                        // Options: PickerTheme.Default | PickerTheme.Dark | PickerTheme.Blue | PickerTheme.Cheerup | PickerTheme.RedBlack
-                        // Themes can be seen in the image
+#                       // Choose a theme for changing the look and feel of the picker
+#                       // Options: PickerTheme.Default | PickerTheme.Dark | PickerTheme.Blue | PickerTheme.Cheerup | PickerTheme.RedBlack
+#                       // Themes can be seen in the image
                         Theme="PickerTheme.Default"
 
-                        // Input change event
+#                       // Input change event
                         OnChange="@(() => Console.WriteLine("OK"))"
                         
-                        // Input text clear event (by pressing close button)
+#                       // Input text clear event (by pressing close button)
                         OnClear="@(() => Console.WriteLine("Cleared"))" />
 
 ```
 
-*You can add multi-instances of InputPersianDatePicker components on a page and all of them work independently without any problem*
+> #### 💡 You can add multi-instances of InputPersianDatePicker components on a page and all of them work independently without any problem
 
 ## Sample template for fast usage:
 
@@ -129,11 +129,11 @@ It is compatible and installable on all .NET5, .NET6, .NET7 and .NET8 Blazor pro
 
 ## Performance:
 
-   * **js size: 35 KB** => gzipped 
+   * `js` size (gzipped) ⇒ **35 kb** 
 
-   * **css size: 5 KB** => gzipped 
+   * `css` size (gzipped) ⇒ **5 kb** 
 
-   * **dll size: 9 KB** =>‌ gzipped 
+   * `dll` size (gzipped) ⇒‌ **9 kb** 
 
 
 ## Special Thanks:
