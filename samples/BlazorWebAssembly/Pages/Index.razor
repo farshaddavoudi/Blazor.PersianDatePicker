@@ -40,7 +40,7 @@
                         DigitType="DigitType.BasedOnCalendar"
                         DateFormat="DateFormat.yyyy_dash_MM_dash_dd"
                         MinDateSetOnToday="true"
-                        Placeholder="Select date"
+                        Placeholder="Disabled input"
                         CssClass="form-control"
                         Style="border: 1px solid purple;
         margin-left:20px;
@@ -49,27 +49,33 @@
                         Theme="PickerTheme.Blue"
                         OnChange="@(() => Console.WriteLine($"OK2 - {_variable2}"))" />
 
-<InputPersianDatePicker Id="myInputDatePicker3"
-                        @bind-Value="_variable3"
-                        Name="myInputName"
-                        Visible="true"
-                        ShowCalendarIcon="false"
-                        PickerAlign="Align.Right"
-                        PickerOffsetTopPositionInPixels="0"
-                        InitialValueSetOnToday="false"
-                        CalendarType="Calendar.SingleModeJalali"
-                        DigitType="DigitType.BasedOnCalendar"
-                        DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
-                        MinDateSetOnToday="true"
-                        Placeholder="انتخاب تاریخ"
-                        CssClass="form-control"
-                        Style="text-align: right;      
-        border: 1px solid blue;
-        margin-left: 20px;
-        width: 20%;
-        float: right"
-                        Theme="PickerTheme.Cheerup"
-                        OnChange="@(() => Console.WriteLine($"OK3 - {_variable3}"))" />
+
+<EditForm Model="Book">
+
+    <InputPersianDatePicker Id="myInputDatePicker3"
+                            @bind-Value="_variable3"
+                            Name="myInputName"
+                            Visible="true"
+                            ShowCalendarIcon="false"
+                            PickerAlign="Align.Right"
+                            PickerOffsetTopPositionInPixels="0"
+                            InitialValueSetOnToday="false"
+                            CalendarType="Calendar.SingleModeJalali"
+                            DigitType="DigitType.BasedOnCalendar"
+                            DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
+                            MinDateSetOnToday="true"
+                            Placeholder="انتخاب تاریخ"
+                            CssClass="form-control"
+                            Style="text-align: right;      
+                                   border: 1px solid blue;
+                                   margin-left: 20px;
+                                   width: 20%;
+                                   float: right"
+                            Theme="PickerTheme.Cheerup"
+                            OnChange="@(() => Console.WriteLine($"OK3 - {_variable3}"))" />
+
+</EditForm>
+
 
 <InputPersianDatePicker Id="myInputDatePicker4"
                         @bind-Value="_variable4"
@@ -93,7 +99,7 @@
 <br />
 <br />
 
-<div style="display: flex; border: 1px solid green;justify-content: space-around; padding: 50px">
+<div style="display: flex; flex-direction: row-reverse; border: 1px solid green;justify-content: space-around; padding: 50px">
     <b> Val1= @_variable1 </b>
     <b> Val2= @_variable2 </b>
     <b> Val3= @_variable3 </b>
@@ -108,11 +114,17 @@
     private string _variable2;
     private string _variable3;
     private string _variable4;
+    private BookModel Book { get; set; } = new();
 
     protected override void OnInitialized()
     {
         _variable3 = "۱۴۰۲/۱۱/۱۱";
 
         base.OnInitialized();
+    }
+
+    public class BookModel
+    {
+        public string Name { get; set; }
     }
 }
