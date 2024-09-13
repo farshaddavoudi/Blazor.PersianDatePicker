@@ -9,6 +9,8 @@
 
 <img src="https://github.com/fericode/Blazor.PersianDatePicker/blob/master/screenshot2.png">
 
+> ✨ **Important fix in v3.4.0 — update your package**: The 1403 Jalali leap year was miscalculated therefore all dates in the next Jalali year (1404) were wrong by one day. It is resolved now. Thanks to [@web724online](https://github.com/web724online) for creating [the issue](https://github.com/farshaddavoudi/Blazor.PersianDatePicker/issues/89).
+
 > ✨ **Important fix in v3.2.0**: When we set the bound parameter value to some date by code (for example in the `OnInitialize` method of our component) and then click on the input, the selected date in the datepicker was always today, not that date. It is resolved now. Thanks to [@EsmaeelAmarloo](https://github.com/EsmaeelAmarloo) for creating [the issue](https://github.com/farshaddavoudi/Blazor.PersianDatePicker/issues/60#issuecomment-1820790657).
 
 ## Compatibility:
