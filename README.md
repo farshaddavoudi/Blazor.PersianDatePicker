@@ -5,7 +5,7 @@
 
 <img src="https://github.com/fericode/Blazor.PersianDatePicker/blob/master/screenshot.png">
 
-*After v2.0.0:*
+#### 🎈 Optimize design after `v2.0.0`:
 
 <img src="https://github.com/fericode/Blazor.PersianDatePicker/blob/master/screenshot2.png">
 
