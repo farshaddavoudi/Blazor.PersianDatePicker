@@ -5,9 +5,11 @@
 
 <img src="https://github.com/fericode/Blazor.PersianDatePicker/blob/master/screenshot.png">
 
-#### 🎈 Optimize design after `v2.0.0`:
+#### 🎈 Optimize design after `v2.0.0` — Show holidays after `v3.5.0` *(optional)*
 
 <img src="https://github.com/fericode/Blazor.PersianDatePicker/blob/master/screenshot2.png">
+
+<img src="https://github.com/fericode/Blazor.PersianDatePicker/blob/master/screenshot-show-holidays.png">
 
 > ✨ **Important fix in v3.4.0 — update your package**: The 1403 Jalali leap year was miscalculated therefore all dates in the next Jalali year (1404) were wrong by one day. It is resolved now. Thanks to [@web724online](https://github.com/web724online) for creating [the issue](https://github.com/farshaddavoudi/Blazor.PersianDatePicker/issues/89).
 
@@ -96,6 +98,13 @@ It is compatible and installable on all .NET 5, .NET 6, .NET 7 and .NET 8 Blazor
        // Themes can be seen in the image
        Theme="PickerTheme.Default"
 
+       // Mark holidays red color in Persian calendar
+       MarkHolidays="true" //Default: true
+
+       // Mark red color for the dates provided here in the calendar
+       // Both "/" seperated and "-" seperated Jalali date formats are valid
+       MarkedDates="@(["1403-06-25", "1403/06/27", "1403/06/28"])" //Optional
+
        // Input change event
        OnChange="@(() => Console.WriteLine("OK"))"
                         
@@ -126,6 +135,8 @@ It is compatible and installable on all .NET 5, .NET 6, .NET 7 and .NET 8 Blazor
                         CssClass="form-control"
                         Style="border:1px solid green; width:20%; float:right"
                         Theme="PickerTheme.RedBlack"
+                        MarkHolidays="true"
+                        MarkedDates="@(["1403-06-25", "1403/06/27", "1403/06/28"])"
                         OnChange="@(() => Console.WriteLine("OK"))" />
 ```
 

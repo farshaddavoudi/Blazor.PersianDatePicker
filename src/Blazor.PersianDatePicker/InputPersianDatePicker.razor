@@ -1,4 +1,10 @@
 ﻿@using System.ComponentModel.DataAnnotations
+
+<style>
+    @GenerateStyles()
+</style>
+
+
 @if (Visible)
 {
     <div class="datepicker_wrapp" style="@Style">
@@ -16,7 +22,6 @@
         <span class="@_clearBtnCssClass" @onclick="@Clear">×</span>
     </div>
 }
-
 
 @code
 {
@@ -166,6 +171,12 @@
     
     [Parameter]
     public EventCallback OnClear { get; set; }
+
+    [Parameter] 
+    public bool MarkHolidays { get; set; } = true;
+
+    [Parameter] 
+    public List<string> MarkedDates { get; set; } = new();
 
     [Inject] private IJSRuntime? JsRuntime { get; set; }
 
@@ -398,5 +409,40 @@
         EditContext?.NotifyFieldChanged(FieldIdentifier);
 
         await OnClear.InvokeAsync();
+    }
+
+    private string GenerateStyles()
+    {
+        var styles = new System.Text.StringBuilder();
+
+        var allMarkedDates = MarkHolidays ? new Holidays().Dates.Union(MarkedDates).Distinct() : MarkedDates;
+
+        foreach (var markedDate in allMarkedDates)
+        {
+            string dataDateAttribute = FormatDateToAttributeValue(markedDate);
+
+            styles.AppendLine($".{Id}-datepicker td[data-date=\"{dataDateAttribute}\"] > span {{ color: red !important; }}");
+        }
+
+        Console.WriteLine(styles.ToString());
+
+        return styles.ToString();
+    }
+
+    private string FormatDateToAttributeValue(string markedDate)
+    {
+        // Replace '/' and '-' with ','
+        string dateWithCommas = markedDate.Replace("/", ",").Replace("-", ",");
+
+        // Split the date into parts
+        string[] dateParts = dateWithCommas.Split(',');
+
+        // Convert parts to integers to remove leading zeros
+        int year = int.Parse(dateParts[0]);
+        int month = int.Parse(dateParts[1]);
+        int day = int.Parse(dateParts[2]);
+
+        // Return the formatted date
+        return $"{year},{month},{day}";
     }
 }
