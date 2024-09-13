@@ -23,8 +23,6 @@
     </div>
 }
 
-
-
 @code
 {
     #nullable enable
@@ -173,6 +171,9 @@
     
     [Parameter]
     public EventCallback OnClear { get; set; }
+
+    [Parameter] 
+    public bool MarkHolidays { get; set; } = true;
 
     [Parameter] 
     public List<string> MarkedDates { get; set; } = new();
@@ -414,7 +415,9 @@
     {
         var styles = new System.Text.StringBuilder();
 
-        foreach (var markedDate in MarkedDates)
+        var allMarkedDates = MarkHolidays ? new Holidays().Dates.Union(MarkedDates).Distinct() : MarkedDates;
+
+        foreach (var markedDate in allMarkedDates)
         {
             string dataDateAttribute = FormatDateToAttributeValue(markedDate);
 
