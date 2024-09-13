@@ -5,7 +5,7 @@
 
 <img src="https://github.com/fericode/Blazor.PersianDatePicker/blob/master/screenshot.png">
 
-#### 🎈 Optimize design after `v2.0.0` — Show holidays after `v3.5.0` *(optional)*
+##### 🎈 Optimize design after `v2.0.0` | Show holidays after `v3.5.0` — Thanks to [@Mostafa-Moradi](https://github.com/Mostafa-Moradi) for asking [the feature](https://github.com/farshaddavoudi/Blazor.PersianDatePicker/issues/93)
 
 <img src="https://github.com/fericode/Blazor.PersianDatePicker/blob/master/screenshot-design-changes.png">
 
