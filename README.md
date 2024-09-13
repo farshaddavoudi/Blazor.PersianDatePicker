@@ -7,9 +7,7 @@
 
 #### 🎈 Optimize design after `v2.0.0` — Show holidays after `v3.5.0` *(optional)*
 
-<img src="https://github.com/fericode/Blazor.PersianDatePicker/blob/master/screenshot2.png">
-
-<img src="https://github.com/fericode/Blazor.PersianDatePicker/blob/master/screenshot-show-holidays.png">
+<img src="https://github.com/fericode/Blazor.PersianDatePicker/blob/master/screenshot-design-changes.png">
 
 > ✨ **Important fix in v3.4.0 — update your package**: The 1403 Jalali leap year was miscalculated therefore all dates in the next Jalali year (1404) were wrong by one day. It is resolved now. Thanks to [@web724online](https://github.com/web724online) for creating [the issue](https://github.com/farshaddavoudi/Blazor.PersianDatePicker/issues/89).
 
