@@ -96,6 +96,10 @@ It is compatible and installable on all .NET 5, .NET 6, .NET 7 and .NET 8 Blazor
        // Themes can be seen in the image
        Theme="PickerTheme.Default"
 
+       // Mark red color for the dates provided here in the calendar
+       // Both "/" seperated and "-" seperated Jalali date formats are valid
+       MarkedDates="@(["1403-06-25", "1403/06/27", "1403/06/28"])" //Optional
+
        // Input change event
        OnChange="@(() => Console.WriteLine("OK"))"
                         
@@ -126,6 +130,7 @@ It is compatible and installable on all .NET 5, .NET 6, .NET 7 and .NET 8 Blazor
                         CssClass="form-control"
                         Style="border:1px solid green; width:20%; float:right"
                         Theme="PickerTheme.RedBlack"
+                        MarkedDates="@(["1403-06-25", "1403/06/27", "1403/06/28"])"
                         OnChange="@(() => Console.WriteLine("OK"))" />
 ```
 

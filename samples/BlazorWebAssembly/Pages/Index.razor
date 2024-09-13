@@ -24,6 +24,7 @@
         width: 20%;
         float: right"
                         Theme="PickerTheme.Default"
+                        MarkedDates="_markedDays"
                         OnChange="@(() => Console.WriteLine($"OK1 - {_variable1}"))"
                         OnClear="@(() => Console.WriteLine("Clear1"))" />
 
@@ -115,6 +116,8 @@
     private string _variable3;
     private string _variable4;
     private BookModel Book { get; set; } = new();
+
+    private List<string> _markedDays = new() { "1403-06-25", "1403/06/27", "1403/06/28" };
 
     protected override void OnInitialized()
     {
