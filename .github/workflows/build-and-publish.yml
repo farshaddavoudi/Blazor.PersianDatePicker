@@ -1,0 +1,149 @@
+name: Build and Publish to NuGet
+
+on:
+  push:
+    tags:
+      - "v*.*.*" # Triggers on tags like v3.6.0, v1.2.3, etc.
+    branches: [main, master, develop]
+  pull_request:
+    branches: [main, master, develop]
+  workflow_dispatch: # Allow manual triggering
+
+env:
+  DOTNET_VERSION: "8.0.x"
+  PROJECT_PATH: "src/Blazor.PersianDatePicker/Blazor.PersianDatePicker.csproj"
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            6.0.x
+            7.0.x
+            8.0.x
+            9.0.x
+
+      - name: Setup Node.js for SASS compilation
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Install and compile SASS
+        run: |
+          npm install -g sass
+          if [ -f "src/Blazor.PersianDatePicker/wwwroot/datepicker.scss" ]; then
+            echo "Compiling SASS to CSS..."
+            sass --style=compressed src/Blazor.PersianDatePicker/wwwroot/datepicker.scss src/Blazor.PersianDatePicker/wwwroot/datepicker.css
+            echo "SASS compilation completed successfully"
+            ls -la src/Blazor.PersianDatePicker/wwwroot/datepicker.css
+          else
+            echo "No SASS file found, skipping compilation"
+          fi
+
+      - name: Extract version from tag
+        id: get_version
+        run: |
+          if [[ $GITHUB_REF == refs/tags/v* ]]; then
+            # Extract version from tag (remove 'v' prefix)
+            VERSION=${GITHUB_REF#refs/tags/v}
+            echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+            echo "IS_RELEASE=true" >> $GITHUB_OUTPUT
+            echo "Extracted version from tag: $VERSION"
+          else
+            # Use project file version for regular builds
+            VERSION=$(grep -oP '<Version>\K[^<]+' src/Blazor.PersianDatePicker/Blazor.PersianDatePicker.csproj)
+            echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+            echo "IS_RELEASE=false" >> $GITHUB_OUTPUT
+            echo "Using project file version: $VERSION"
+          fi
+
+      - name: Update project version
+        if: steps.get_version.outputs.IS_RELEASE == 'true'
+        run: |
+          VERSION="${{ steps.get_version.outputs.VERSION }}"
+          echo "Updating project version to: $VERSION"
+          sed -i "s|<Version>.*</Version>|<Version>$VERSION</Version>|" src/Blazor.PersianDatePicker/Blazor.PersianDatePicker.csproj
+          echo "Updated project file version:"
+          grep "<Version>" src/Blazor.PersianDatePicker/Blazor.PersianDatePicker.csproj
+
+      - name: Restore dependencies
+        run: dotnet restore ${{ env.PROJECT_PATH }}
+
+      - name: Build project
+        run: dotnet build ${{ env.PROJECT_PATH }} --configuration Release --no-restore
+
+      - name: Run tests
+        run: |
+          if [ -d "tests" ] || find . -name "*.Tests.csproj" -type f | grep -q .; then
+            echo "Running tests..."
+            dotnet test --configuration Release --no-build --verbosity normal
+          else
+            echo "No tests found, skipping test step"
+          fi
+
+      - name: Pack NuGet package
+        run: |
+          dotnet pack ${{ env.PROJECT_PATH }} \
+            --configuration Release \
+            --no-build \
+            --output ./artifacts \
+            -p:PackageVersion=${{ steps.get_version.outputs.VERSION }}
+
+      - name: List generated packages
+        run: |
+          echo "Generated NuGet packages:"
+          ls -la ./artifacts/
+
+      - name: Upload package artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuget-package-v${{ steps.get_version.outputs.VERSION }}
+          path: ./artifacts/*.nupkg
+
+      - name: Publish to NuGet
+        if: steps.get_version.outputs.IS_RELEASE == 'true'
+        run: |
+          echo "Publishing to NuGet..."
+          dotnet nuget push ./artifacts/*.nupkg \
+            --api-key ${{ secrets.NUGET_API_KEY }} \
+            --source https://api.nuget.org/v3/index.json \
+            --skip-duplicate
+
+      - name: Create GitHub Release
+        if: steps.get_version.outputs.IS_RELEASE == 'true'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ steps.get_version.outputs.VERSION }}
+          body: |
+            ## 🎉 Release ${{ steps.get_version.outputs.VERSION }}
+
+            ### What's Changed
+            - Performance improvements and bug fixes
+            - Updated target frameworks (.NET 6, 7, 8, 9)
+            - Removed deprecated .NET 5 support
+            - Cross-platform SASS compilation
+
+            ### 🚀 Installation
+            ```bash
+            dotnet add package Blazor.PersianDatePicker --version ${{ steps.get_version.outputs.VERSION }}
+            ```
+
+            ### 📖 Documentation
+            Check the [README](https://github.com/farshaddavoudi/Blazor.PersianDatePicker/blob/main/README.md) for usage instructions.
+
+            **Full Changelog**: https://github.com/farshaddavoudi/Blazor.PersianDatePicker/compare/v${{ steps.get_version.outputs.VERSION }}...HEAD
+          draft: false
+          prerelease: false
+          files: ./artifacts/*.nupkg
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

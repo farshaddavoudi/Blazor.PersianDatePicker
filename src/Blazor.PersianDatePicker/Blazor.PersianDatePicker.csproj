@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 	<PropertyGroup>
-		<TargetFrameworks>net5.0;net6.0</TargetFrameworks>
+		<TargetFrameworks>net6.0;net7.0;net8.0;net9.0</TargetFrameworks>
 		<Version>3.5.2</Version>
 		<LangVersion>latest</LangVersion>
 		<NoWarn>$(NoWarn);NU1701;1702;1591;NU1602;CS8609;CS8610;CS8619;CS8632</NoWarn>
@@ -39,9 +39,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.0" Condition="'$(TargetFramework)' == 'net5.0'" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" Condition="'$(TargetFramework)' == 'net6.0'" />
-		<PackageReference Include="Delegate.SassBuilder" Version="1.4.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.0" Condition="'$(TargetFramework)' == 'net7.0'" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0" Condition="'$(TargetFramework)' == 'net8.0'" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.0" Condition="'$(TargetFramework)' == 'net9.0'" />
 		<PackageReference Include="SourceLink.Embed.AllSourceFiles" Version="2.8.3" PrivateAssets="all" />
 		<PackageReference Include="SourceLink.Copy.PdbFiles" Version="2.8.3" PrivateAssets="All" />
 	</ItemGroup>
