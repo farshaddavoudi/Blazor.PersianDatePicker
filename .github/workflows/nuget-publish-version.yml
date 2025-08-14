@@ -32,6 +32,36 @@ jobs:
             5.0.x
             6.0.x
 
+      - name: Setup Node.js (for SASS compilation)
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Install SASS compiler
+        run: npm install -g sass
+
+      - name: Compile SASS files
+        run: |
+          if [ -f "src/Blazor.PersianDatePicker/wwwroot/datepicker.scss" ]; then
+            echo "Compiling SASS files..."
+            sass --style=compressed src/Blazor.PersianDatePicker/wwwroot/datepicker.scss src/Blazor.PersianDatePicker/wwwroot/datepicker.css
+            echo "SASS compilation completed"
+            echo "Generated CSS file:"
+            ls -la src/Blazor.PersianDatePicker/wwwroot/datepicker.css
+          else
+            echo "No SASS files found, skipping compilation"
+          fi
+
+      - name: Temporarily disable SassBuilder for CI
+        run: |
+          # Create a backup of the original project file
+          cp src/Blazor.PersianDatePicker/Blazor.PersianDatePicker.csproj src/Blazor.PersianDatePicker/Blazor.PersianDatePicker.csproj.backup
+          # Remove or comment out the SassBuilder package reference for CI build
+          sed -i 's|<PackageReference Include="Delegate.SassBuilder"|<!-- <PackageReference Include="Delegate.SassBuilder"|' src/Blazor.PersianDatePicker/Blazor.PersianDatePicker.csproj
+          sed -i 's|Version="1.4.0" />|Version="1.4.0" /> -->|' src/Blazor.PersianDatePicker/Blazor.PersianDatePicker.csproj
+          echo "Modified project file for CI:"
+          cat src/Blazor.PersianDatePicker/Blazor.PersianDatePicker.csproj | grep -A1 -B1 "SassBuilder"
+
       - name: Update project version
         if: startsWith(github.ref, 'refs/tags/v')
         run: |
