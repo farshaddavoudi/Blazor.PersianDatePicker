@@ -1,9 +1,12 @@
 ﻿@using System.ComponentModel.DataAnnotations
+@implements IDisposable
 
-<style>
-    @GenerateStyles()
-</style>
-
+@if (!string.IsNullOrEmpty(_generatedStyles))
+{
+    <style>
+        @((MarkupString)_generatedStyles)
+    </style>
+}
 
 @if (Visible)
 {
@@ -28,15 +31,17 @@
     #nullable enable
 
     private string? _internalCssClass;
-
     private string? _iconCssClass;
-
     private string? _clearBtnCssClass;
+    private string? _generatedStyles;
+    private static readonly Dictionary<string, string> StyleCache = new();
+    private string? _currentStyleCacheKey;
+    private DotNetObjectReference<InputPersianDatePicker>? _dotNetObjectReference;
+    private bool _disposed = false;
 
     public FieldIdentifier FieldIdentifier { get; private set; }
 
     private string? _value;
-
     private bool _isJalaliCurrentCalendarType;
 
     [CascadingParameter]
@@ -239,6 +244,8 @@
         }
 
         _internalCssClass = Disabled ? "datepicker-disabled" : "blazor-datepicker";
+        // Generate styles only once per component initialization
+        GenerateStyles();
 
         await base.OnInitializedAsync();
     }
@@ -283,8 +290,11 @@
 
             var minDate = MinDateSetOnToday ? "today" : null;
 
+            // Create and store the DotNetObjectReference
+            _dotNetObjectReference = DotNetObjectReference.Create(this);
+
             await JsRuntime!.InvokeVoidAsync("blazorReady",
-                DotNetObjectReference.Create(this),
+                _dotNetObjectReference,
                 Id!,
                 calendarType,
                 enableSwitchCalendar,
@@ -411,25 +421,42 @@
         await OnClear.InvokeAsync();
     }
 
-    private string GenerateStyles()
+    private void GenerateStyles()
     {
-        var styles = new System.Text.StringBuilder();
-
+        // Create cache key based on component configuration
         var allMarkedDates = MarkHolidays ? new Holidays().Dates.Union(MarkedDates).Distinct() : MarkedDates;
+        _currentStyleCacheKey = $"{Id}_{MarkHolidays}_{string.Join(",", MarkedDates.OrderBy(x => x))}";
 
-        foreach (var markedDate in allMarkedDates)
+        // Check if styles are already cached
+        if (StyleCache.TryGetValue(_currentStyleCacheKey, out var cachedStyles))
+        {
+            _generatedStyles = cachedStyles;
+            return;
+        }
+
+        // Generate styles only if not cached
+        IEnumerable<string> markedDates = allMarkedDates.ToList();
+
+        var styles = new System.Text.StringBuilder(markedDates.Count() * 100); // Pre-allocate capacity
+
+        foreach (var markedDate in markedDates)
         {
             string dataDateAttribute = FormatDateToAttributeValue(markedDate);
-
             styles.AppendLine($".{Id}-datepicker td[data-date=\"{dataDateAttribute}\"] > span {{ color: red !important; }}");
         }
 
-        return styles.ToString();
+        _generatedStyles = styles.ToString();
+        
+        // Cache the generated styles (with size limit to prevent unlimited growth)
+        if (StyleCache.Count < 50) // Limit cache size
+        {
+            StyleCache[_currentStyleCacheKey] = _generatedStyles;
+        }
     }
 
     private string FormatDateToAttributeValue(string markedDate)
     {
-        // Replace '/' and '-' with ','
+        // Replace '/' and '-' with ',',
         string dateWithCommas = markedDate.Replace("/", ",").Replace("-", ",");
 
         // Split the date into parts
@@ -442,5 +469,35 @@
 
         // Return the formatted date
         return $"{year},{month},{day}";
+    }
+
+    // IDisposable implementation
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!_disposed && disposing)
+        {
+            // Unsubscribe from EditContext events
+            if (EditContext != null)
+            {
+                EditContext.OnValidationStateChanged -= ValidationStateChanged;
+            }
+
+            // Dispose DotNetObjectReference to prevent memory leaks
+            _dotNetObjectReference?.Dispose();
+
+            // Clean up cached styles for this component
+            if (!string.IsNullOrEmpty(_currentStyleCacheKey))
+            {
+                StyleCache.Remove(_currentStyleCacheKey);
+            }
+
+            _disposed = true;
+        }
     }
 }
