@@ -147,3 +147,17 @@ jobs:
           files: ./artifacts/*.nupkg
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit version update back to repository
+        if: steps.get_version.outputs.IS_RELEASE == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add src/Blazor.PersianDatePicker/Blazor.PersianDatePicker.csproj
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update version to ${{ steps.get_version.outputs.VERSION }} [skip ci]"
+            git push origin master
+            echo "Version updated and committed to repository"
+          fi
