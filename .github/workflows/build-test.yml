@@ -1,0 +1,51 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [main, master, develop]
+  pull_request:
+    branches: [main, master, develop]
+
+env:
+  DOTNET_VERSION: "5.0.x"
+  PROJECT_PATH: "src/Blazor.PersianDatePicker/Blazor.PersianDatePicker.csproj"
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restore dependencies
+        run: dotnet restore ${{ env.PROJECT_PATH }}
+
+      - name: Build project
+        run: dotnet build ${{ env.PROJECT_PATH }} --configuration Release --no-restore
+
+      - name: Run tests (if any)
+        run: |
+          if [ -d "tests" ]; then
+            dotnet test --configuration Release --no-build --verbosity normal
+          else
+            echo "No tests found, skipping test step"
+          fi
+
+      - name: Pack NuGet package (for validation)
+        run: |
+          dotnet pack ${{ env.PROJECT_PATH }} \
+            --configuration Release \
+            --no-build \
+            --output ./artifacts
+
+      - name: Upload package artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuget-package-preview
+          path: ./artifacts/*.nupkg

@@ -1,0 +1,90 @@
+name: Build and Publish to NuGet on Version Tag
+
+on:
+  push:
+    tags:
+      - "v*.*.*" # Triggers on tags like v3.6.0, v1.2.3, etc.
+
+env:
+  DOTNET_VERSION: "5.0.x"
+  PROJECT_PATH: "src/Blazor.PersianDatePicker/Blazor.PersianDatePicker.csproj"
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Extract version from tag
+        id: get_version
+        run: |
+          # Remove 'v' prefix from tag (e.g., v3.6.0 -> 3.6.0)
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "Extracted version: $VERSION"
+
+      - name: Restore dependencies
+        run: dotnet restore ${{ env.PROJECT_PATH }}
+
+      - name: Build project
+        run: dotnet build ${{ env.PROJECT_PATH }} --configuration Release --no-restore
+
+      - name: Run tests (if any)
+        run: |
+          if [ -d "tests" ]; then
+            dotnet test --configuration Release --no-build --verbosity normal
+          else
+            echo "No tests found, skipping test step"
+          fi
+
+      - name: Pack NuGet package
+        run: |
+          dotnet pack ${{ env.PROJECT_PATH }} \
+            --configuration Release \
+            --no-build \
+            --output ./artifacts \
+            -p:PackageVersion=${{ steps.get_version.outputs.VERSION }} \
+            -p:AssemblyVersion=${{ steps.get_version.outputs.VERSION }} \
+            -p:FileVersion=${{ steps.get_version.outputs.VERSION }}
+
+      - name: Upload package artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuget-package
+          path: ./artifacts/*.nupkg
+
+      - name: Publish to NuGet
+        run: |
+          dotnet nuget push ./artifacts/*.nupkg \
+            --api-key ${{ secrets.NUGET_API_KEY }} \
+            --source https://api.nuget.org/v3/index.json \
+            --skip-duplicate
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ steps.get_version.outputs.VERSION }}
+          body: |
+            Release notes for version ${{ steps.get_version.outputs.VERSION }}
+
+            ## Changes
+            - Add your release notes here
+
+            ## Installation
+            ```
+            dotnet add package Blazor.PersianDatePicker --version ${{ steps.get_version.outputs.VERSION }}
+            ```
+          draft: false
+          prerelease: false
