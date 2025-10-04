@@ -118,7 +118,7 @@ It is compatible and installable on all .NET 5, .NET 6, .NET 7 and .NET 8 Blazor
 
 ```
 
-## Digit Script Configuration
+## Digit Type Configuration
 Using `InputDigitType` and `PickerDigitType` you can decouple the numerals rendered in the textbox from those rendered inside the popup. The default (`DigitType.BasedOnCalendar`) continues to follow the active Jalali/Miladi calendar, but you can now force English or Persian digits explicitly.
 
 <table>
