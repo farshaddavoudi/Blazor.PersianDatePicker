@@ -17,7 +17,7 @@
 
 
 ## Compatibility:
-It is compatible and installable on all .NET 5, .NET 6, .NET 7 and .NET 8 Blazor projects
+It is compatible and installable on all .NET 5, .NET 6, .NET 7, .NET 8 and .NET 9 Blazor projects
 
 ## Usage:
 
