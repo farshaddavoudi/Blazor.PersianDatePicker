@@ -1,4 +1,4 @@
-﻿@using System.ComponentModel.DataAnnotations
+@using System.ComponentModel.DataAnnotations
 @implements IDisposable
 
 @if (!string.IsNullOrEmpty(_generatedStyles))
@@ -43,6 +43,7 @@
 
     private string? _value;
     private bool _isJalaliCurrentCalendarType;
+    private DigitType _inputDigitType = DigitType.BasedOnCalendar;
 
     [CascadingParameter]
     public EditContext? EditContext { get; set; }
@@ -127,7 +128,28 @@
     /// Control the digit type showing in input after selecting by picker
     /// </summary>
     [Parameter]
-    public DigitType DigitType { get; set; } = DigitType.BasedOnCalendar;
+    public DigitType InputDigitType
+    {
+        get => _inputDigitType;
+        set => _inputDigitType = value;
+    }
+
+    /// <summary>
+    /// Backwards compatible proxy for InputDigitType
+    /// </summary>
+    [Parameter]
+    [Obsolete("Use InputDigitType instead.")]
+    public DigitType DigitType
+    {
+        get => _inputDigitType;
+        set => _inputDigitType = value;
+    }
+
+    /// <summary>
+    /// Control the digit type used inside the picker UI
+    /// </summary>
+    [Parameter]
+    public DigitType PickerDigitType { get; set; } = DigitType.BasedOnCalendar;
 
     /// <summary>
     /// Format of date to show in input after selecting by picker
@@ -278,15 +300,11 @@
 
             bool enableSwitchCalendar = CalendarType == Calendar.DualModeJalaliDefault || CalendarType == Calendar.DualModeMiladiDefault;
 
-            bool? hasExplicitDigitType = DigitType != DigitType.BasedOnCalendar;
+            bool hasExplicitInputDigitType = InputDigitType != DigitType.BasedOnCalendar;
+            bool hasExplicitPickerDigitType = PickerDigitType != DigitType.BasedOnCalendar;
 
-            string digitType = "float";
-
-            if (DigitType == DigitType.Persian)
-                digitType = "fa";
-
-            else if (DigitType == DigitType.English)
-                digitType = "en";
+            string inputDigitType = ToDigitTypeString(InputDigitType);
+            string pickerDigitType = ToDigitTypeString(PickerDigitType);
 
             var minDate = MinDateSetOnToday ? "today" : null;
 
@@ -298,8 +316,10 @@
                 Id!,
                 calendarType,
                 enableSwitchCalendar,
-                hasExplicitDigitType,
-                digitType,
+                hasExplicitInputDigitType,
+                inputDigitType,
+                hasExplicitPickerDigitType,
+                pickerDigitType,
                 InitialValueSetOnToday,
                 DateFormat.ToEnumDisplayName()!,
                 minDate ?? string.Empty,
@@ -384,16 +404,30 @@
         await OnValueChanged();
     }
 
+    private static string ToDigitTypeString(DigitType digitType)
+    {
+        return digitType switch
+        {
+            DigitType.Persian => "fa",
+            DigitType.English => "en",
+            _ => "float"
+        };
+    }
+
     private void ModifyValueDigit()
     {
-        if (DigitType == DigitType.Persian)
+        if (_inputDigitType == DigitType.Persian)
+        {
             _value = _value?.EnglishToPersianDigits();
-
-        else if (DigitType == DigitType.English)
+        }
+        else if (_inputDigitType == DigitType.English)
+        {
             _value = _value?.PersianToEnglishDigits();
-
-        else if (DigitType == DigitType.BasedOnCalendar)
+        }
+        else
+        {
             _value = _isJalaliCurrentCalendarType ? _value?.EnglishToPersianDigits() : _value?.PersianToEnglishDigits();
+        }
     }
 
     private async Task OnValueChanged()

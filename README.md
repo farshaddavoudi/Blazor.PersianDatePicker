@@ -1,4 +1,4 @@
-﻿# Blazor.PersianDatePicker
+# Blazor.PersianDatePicker
  
 [![NuGet Version](https://img.shields.io/nuget/v/Blazor.PersianDatePicker.svg?style=flat)](https://www.nuget.org/packages/Blazor.PersianDatePicker/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://raw.githubusercontent.com/farshaddavoudi/Blazor.PersianDatePicker/master/LICENSE)
@@ -9,9 +9,12 @@
 
 <img src="https://github.com/fericode/Blazor.PersianDatePicker/blob/master/screenshot-design-changes.png">
 
+> ✨ **Important fix in v3.2.0**: When we set the bound parameter value to some date by code (for example in the `OnInitialize` method of our component) and then click on the input, the selected date in the datepicker was always today, not that date. It is resolved now. Thanks to [@EsmaeelAmarloo](https://github.com/EsmaeelAmarloo) for creating [the issue](https://github.com/farshaddavoudi/Blazor.PersianDatePicker/issues/60#issuecomment-1820790657).
+
 > ✨ **Important fix in v3.4.0 — update your package**: The 1403 Jalali leap year was miscalculated therefore all dates in the next Jalali year (1404) were wrong by one day. It is resolved now. Thanks to [@web724online](https://github.com/web724online) for creating [the issue](https://github.com/farshaddavoudi/Blazor.PersianDatePicker/issues/89).
 
-> ✨ **Important fix in v3.2.0**: When we set the bound parameter value to some date by code (for example in the `OnInitialize` method of our component) and then click on the input, the selected date in the datepicker was always today, not that date. It is resolved now. Thanks to [@EsmaeelAmarloo](https://github.com/EsmaeelAmarloo) for creating [the issue](https://github.com/farshaddavoudi/Blazor.PersianDatePicker/issues/60#issuecomment-1820790657).
+> ⚠️ **Breaking change in v3.7.0**: The component parameter formerly named `DigitType` is now `InputDigitType`, and a new `PickerDigitType` parameter controls the digits rendered inside the popup. Thanks to [@AmirJoleini](https://github.com/AmirJoleini) for contributing the improvement.
+
 
 ## Compatibility:
 It is compatible and installable on all .NET 5, .NET 6, .NET 7 and .NET 8 Blazor projects
@@ -71,9 +74,13 @@ It is compatible and installable on all .NET 5, .NET 6, .NET 7 and .NET 8 Blazor
        // Options: Calendar.DualModeJalaliDefault | Calendar.DualModeMiladiDefault | Calendar.SingleModeJalali | Calendar.SingleModeMiladi
        CalendarType="Calendar.DualModeJalaliDefault" //Default: Calendar.DualModeJalaliDefault
 
-       // Control the digit type showing in the input after selecting by the picker
+       // Control the digit script rendered in the input after a selection
        // Options: DigitType.BasedOnCalendar | DigitType.Persian | DigitType.English
-       DigitType="DigitType.BasedOnCalendar" //Default: DigitType.BasedOnCalendar
+       InputDigitType="DigitType.BasedOnCalendar" //Default: DigitType.BasedOnCalendar
+
+       // Control the digit script rendered inside the picker UI itself
+       // Options: DigitType.BasedOnCalendar | DigitType.Persian | DigitType.English
+       PickerDigitType="DigitType.BasedOnCalendar" //Default: DigitType.BasedOnCalendar
 
        // Format of date to show in the input after selecting by picker, e.g. 1400/01/01 or 1400-01-01
        // Options: DateFormat.yyyy_slash_MM_slash_dd | DateFormat.yyyy_dash_MM_dash_dd
@@ -111,6 +118,22 @@ It is compatible and installable on all .NET 5, .NET 6, .NET 7 and .NET 8 Blazor
 
 ```
 
+## Digit Script Configuration
+Using `InputDigitType` and `PickerDigitType` you can decouple the numerals rendered in the textbox from those rendered inside the popup. The default (`DigitType.BasedOnCalendar`) continues to follow the active Jalali/Miladi calendar, but you can now force English or Persian digits explicitly.
+
+<table>
+  <tr>
+    <td><img src="./screenshot-picker-digit-type-english.png" alt="Picker showing English digits" width="360"></td>
+    <td><img src="./screenshot-picker-digit-type-persian.png" alt="Picker showing Persian digits" width="360"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>`PickerDigitType="DigitType.English"`</sub></td>
+    <td align="center"><sub>`PickerDigitType="DigitType.Persian"`</sub></td>
+  </tr>
+</table>
+
+> **Tip:** Set `InputDigitType="DigitType.English"` while keeping `PickerDigitType="DigitType.Persian"` to show western numerals in the textbox but maintain a localized Jalali calendar grid.
+
 > #### 💡 You can add multi-instances of InputPersianDatePicker components on a page and all of them work independently without any problem
 
 ## Sample template for fast usage:
@@ -126,7 +149,8 @@ It is compatible and installable on all .NET 5, .NET 6, .NET 7 and .NET 8 Blazor
                         PickerOffsetTopPositionInPixels="1"
                         InitialValueSetOnToday="false"
                         CalendarType="Calendar.SingleModeJalali"
-                        DigitType="DigitType.BasedOnCalendar"
+                        InputDigitType="DigitType.BasedOnCalendar"
+                        PickerDigitType="DigitType.BasedOnCalendar"
                         DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
                         MinDateSetOnToday="true"
                         Placeholder="Select date"
@@ -149,4 +173,3 @@ It is compatible and installable on all .NET 5, .NET 6, .NET 7 and .NET 8 Blazor
 
 ## Special Thanks:
   *This project is ported from [pwt.datepicker](https://github.com/babakhani/pwt.datepicker) project with a lot of customizations and optimizations for easy and fast use for Blazor applications. Therefore, I appreciate the great effort of Reza Babakhani @babakhani and all contributors of that project*
-

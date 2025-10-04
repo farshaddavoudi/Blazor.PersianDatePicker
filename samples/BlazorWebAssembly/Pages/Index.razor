@@ -1,4 +1,4 @@
-﻿@page "/"
+@page "/"
 
 <h1>Hello, world!</h1>
 
@@ -16,7 +16,8 @@
                         InitialValueSetOnToday="true"
                         ShowCalendarIcon="true"
                         CalendarType="Calendar.DualModeJalaliDefault"
-                        DigitType="DigitType.BasedOnCalendar"
+                        InputDigitType="DigitType.English"
+                        PickerDigitType="DigitType.English"
                         DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
                         MinDateSetOnToday="true"
                         Placeholder="Select date"
@@ -39,7 +40,7 @@
                         PickerOffsetTopPositionInPixels="25"
                         InitialValueSetOnToday="false"
                         CalendarType="Calendar.DualModeMiladiDefault"
-                        DigitType="DigitType.BasedOnCalendar"
+                        InputDigitType="DigitType.BasedOnCalendar"
                         DateFormat="DateFormat.yyyy_dash_MM_dash_dd"
                         MinDateSetOnToday="true"
                         Placeholder="Disabled input"
@@ -63,7 +64,8 @@
                             PickerOffsetTopPositionInPixels="0"
                             InitialValueSetOnToday="false"
                             CalendarType="Calendar.SingleModeJalali"
-                            DigitType="DigitType.BasedOnCalendar"
+                            InputDigitType="DigitType.BasedOnCalendar"
+                            PickerDigitType="DigitType.BasedOnCalendar"
                             DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
                             MinDateSetOnToday="true"
                             Placeholder="انتخاب تاریخ"
@@ -88,7 +90,7 @@
                         PickerOffsetTopPositionInPixels="1"
                         InitialValueSetOnToday="false"
                         CalendarType="Calendar.SingleModeMiladi"
-                        DigitType="DigitType.BasedOnCalendar"
+                        InputDigitType="DigitType.BasedOnCalendar"
                         DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
                         MinDateSetOnToday="true"
                         Placeholder="Select date"
@@ -132,3 +134,4 @@
         public string Name { get; set; }
     }
 }
+
