@@ -13,7 +13,7 @@
 
 > ✨ **Important fix in v3.4.0 — update your package**: The 1403 Jalali leap year was miscalculated therefore all dates in the next Jalali year (1404) were wrong by one day. It is resolved now. Thanks to [@web724online](https://github.com/web724online) for creating [the issue](https://github.com/farshaddavoudi/Blazor.PersianDatePicker/issues/89).
 
-> ⚠️ **Breaking change in v3.7.0**: The component parameter formerly named `DigitType` is now `InputDigitType`, and a new `PickerDigitType` parameter controls the digits rendered inside the popup. Thanks to [@AmirJoleini](https://github.com/AmirJoleini) for contributing the improvement.
+> ⚠️ **Breaking change in v3.7.0**: The component parameter formerly named `DigitType` is now `InputDigitType`, and a new `PickerDigitType` parameter controls the digits rendered inside the popup. See [Digit Type Configuration](#digit-type-configuration) for migration tips. Thanks to [@AmirJoleini](https://github.com/AmirJoleini) for contributing the improvement.
 
 
 ## Compatibility:
@@ -173,3 +173,4 @@ Using `InputDigitType` and `PickerDigitType` you can decouple the numerals rende
 
 ## Special Thanks:
   *This project is ported from [pwt.datepicker](https://github.com/babakhani/pwt.datepicker) project with a lot of customizations and optimizations for easy and fast use for Blazor applications. Therefore, I appreciate the great effort of Reza Babakhani @babakhani and all contributors of that project*
+
