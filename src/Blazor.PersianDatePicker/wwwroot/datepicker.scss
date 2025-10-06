@@ -1975,6 +1975,9 @@
         min-width: 50px
     }
 
+    .datepicker-plot-area .toolbox .pwt-btn-submit:hover, .datepicker-plot-area .toolbox .pwt-btn-calendar:hover, .datepicker-plot-area .toolbox .pwt-btn-today:hover, .datepicker-plot-area .toolbox .pwt-btn-close:hover {
+        background-color: #393939
+    }
 
     .datepicker-plot-area .datepicker-navigator {
         display: block;
