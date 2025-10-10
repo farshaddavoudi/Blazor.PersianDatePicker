@@ -6,106 +6,142 @@
 
 <SurveyPrompt Title="How is Blazor working for you?" />
 
-<InputPersianDatePicker Id="myInputDatePicker"
-                        @bind-Value="_variable1"
-                        Name="myInputName"
-                        Visible="true"
-                        ReadOnly="false"
-                        PickerAlign="Align.Right"
-                        PickerOffsetTopPositionInPixels="0"
-                        InitialValueSetOnToday="true"
-                        ShowCalendarIcon="true"
-                        CalendarType="Calendar.DualModeJalaliDefault"
-                        InputDigitType="DigitType.English"
-                        PickerDigitType="DigitType.Persian"
-                        DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
-                        MinDateSetOnToday="true"
-                        Placeholder="Select date"
-                        CssClass="form-control"
-                        Style="margin-left:20px;
-        width: 20%;
-        float: right"
-                        Theme="PickerTheme.Default"
-                        OnChange="@(() => Console.WriteLine($"OK1 - {_variable1}"))"
-                        OnClear="@(() => Console.WriteLine("Clear1"))" />
-
-<InputPersianDatePicker Id="myInputDatePicker2"
-                        @bind-Value="_variable2"
-                        Name="myInputName"
-                        Visible="true"
-                        Disabled="true"
-                        PickerAlign="Align.Left"
-                        ShowCalendarIcon="false"
-                        PickerOffsetTopPositionInPixels="25"
-                        InitialValueSetOnToday="false"
-                        CalendarType="Calendar.DualModeMiladiDefault"
-                        InputDigitType="DigitType.BasedOnCalendar"
-                        DateFormat="DateFormat.yyyy_dash_MM_dash_dd"
-                        MinDateSetOnToday="true"
-                        Placeholder="Disabled input"
-                        CssClass="form-control"
-                        Style="border: 1px solid purple;
-        margin-left:20px;
-        width: 20%;
-        float: right"
-                        Theme="PickerTheme.Blue"
-                        OnChange="@(() => Console.WriteLine($"OK2 - {_variable2}"))" />
-
-
-<EditForm Model="Book">
-
-    <InputPersianDatePicker Id="myInputDatePicker3"
-                            @bind-Value="_variable3"
+<div style="display: flex; flex-direction: row-reverse; justify-content: space-around; padding: 50px;">
+    <InputPersianDatePicker Id="myInputDatePicker"
+                            @bind-Value="_variable1"
                             Name="myInputName"
                             Visible="true"
-                            ShowCalendarIcon="false"
+                            ReadOnly="false"
                             PickerAlign="Align.Right"
                             PickerOffsetTopPositionInPixels="0"
+                            InitialValueSetOnToday="true"
+                            ShowCalendarIcon="true"
+                            CalendarType="Calendar.DualModeJalaliDefault"
+                            InputDigitType="DigitType.English"
+                            PickerDigitType="DigitType.English"
+                            DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
+                            MinDateSetOnToday="true"
+                            Placeholder="Select date"
+                            CssClass="form-control"
+                            Style="margin-left:20px;
+        width: 250px;
+        float: right;
+        border:1px solid #0d6efd"
+                            Theme="PickerTheme.Default"
+                            OnChange="@(() => Console.WriteLine($"OK1 - {_variable1}"))"
+                            OnClear="@(() => Console.WriteLine("Clear1"))" />
+
+    <InputPersianDatePicker Id="myInputDatePicker2"
+                            @bind-Value="_variable2"
+                            Name="myInputName"
+                            Visible="true"
+                            Disabled="true"
+                            PickerAlign="Align.Left"
+                            ShowCalendarIcon="false"
+                            PickerOffsetTopPositionInPixels="25"
                             InitialValueSetOnToday="false"
-                            CalendarType="Calendar.SingleModeJalali"
+                            CalendarType="Calendar.DualModeMiladiDefault"
+                            InputDigitType="DigitType.BasedOnCalendar"
+                            DateFormat="DateFormat.yyyy_dash_MM_dash_dd"
+                            MinDateSetOnToday="true"
+                            Placeholder="Disabled input"
+                            CssClass="form-control"
+                            Style="border: 1px solid purple;
+        margin-left:20px;
+        width: 250px;
+        float: right"
+                            Theme="PickerTheme.Blue"
+                            OnChange="@(() => Console.WriteLine($"OK2 - {_variable2}"))" />
+
+
+    <EditForm Model="Book">
+
+        <InputPersianDatePicker Id="myInputDatePicker3"
+                                @bind-Value="_variable3"
+                                Name="myInputName"
+                                Visible="true"
+                                ShowCalendarIcon="false"
+                                PickerAlign="Align.Right"
+                                PickerOffsetTopPositionInPixels="0"
+                                InitialValueSetOnToday="false"
+                                CalendarType="Calendar.SingleModeJalali"
+                                InputDigitType="DigitType.BasedOnCalendar"
+                                PickerDigitType="DigitType.BasedOnCalendar"
+                                DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
+                                MinDateSetOnToday="true"
+                                Placeholder="?????? ?????"
+                                CssClass="form-control"
+                                Style="text-align: right;
+                                   border: 1px solid blue;
+                                   margin-left: 20px;
+                                   width: 250px;
+                                   float: right"
+                                Theme="PickerTheme.Cheerup"
+                                OnChange="@(() => Console.WriteLine($"OK3 - {_variable3}"))" />
+
+    </EditForm>
+
+
+    <InputPersianDatePicker Id="myInputDatePicker4"
+                            @bind-Value="_variable4"
+                            Name="myInputName"
+                            Visible="true"
+                            Disabled="false"
+                            PickerAlign="Align.Right"
+                            PickerOffsetTopPositionInPixels="1"
+                            InitialValueSetOnToday="false"
+                            CalendarType="Calendar.SingleModeMiladi"
                             InputDigitType="DigitType.BasedOnCalendar"
                             DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
                             MinDateSetOnToday="true"
-                            Placeholder="انتخاب تاریخ"
+                            Placeholder="Select date"
                             CssClass="form-control"
-                            Style="text-align: right;
-                                   border: 1px solid blue;
-                                   margin-left: 20px;
-                                   width: 20%;
-                                   float: right"
-                            Theme="PickerTheme.Cheerup"
-                            OnChange="@(() => Console.WriteLine($"OK3 - {_variable3}"))" />
+                            Style="border:1px solid green; width:250px; float:right"
+                            Theme="PickerTheme.RedBlack"
+                            OnChange="@(() => Console.WriteLine($"OK4 - {_variable4}"))" />
 
-</EditForm>
+    <InputPersianDatePicker Id="myInputDatePicker5"
+                            @bind-ValueAsDateTime="_variableDateTime"
+                            Name="myDateTime"
+                            Visible="true"
+                            ReadOnly="false"
+                            PickerAlign="Align.Right"
+                            CalendarType="Calendar.DualModeMiladiDefault"
+                            InputDigitType="DigitType.English"
+                            PickerDigitType="DigitType.BasedOnCalendar"
+                            DateFormat="DateFormat.yyyy_dash_MM_dash_dd"
+                            Placeholder="Select event date"
+                            CssClass="form-control"
+                            Style="border:1px solid orange; width:250px; float:right"
+                            Theme="PickerTheme.Dark" />
 
-
-<InputPersianDatePicker Id="myInputDatePicker4"
-                        @bind-Value="_variable4"
-                        Name="myInputName"
-                        Visible="true"
-                        Disabled="false"
-                        PickerAlign="Align.Right"
-                        PickerOffsetTopPositionInPixels="1"
-                        InitialValueSetOnToday="false"
-                        CalendarType="Calendar.SingleModeMiladi"
-                        InputDigitType="DigitType.BasedOnCalendar"
-                        DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
-                        MinDateSetOnToday="true"
-                        Placeholder="Select date"
-                        CssClass="form-control"
-                        Style="border:1px solid green; width:20%; float:right"
-                        Theme="PickerTheme.RedBlack"
-                        OnChange="@(() => Console.WriteLine($"OK4 - {_variable4}"))" />
+    <InputPersianDatePicker Id="myInputDatePicker6"
+                            @bind-ValueAsDateOnly="_variableDateOnly"
+                            Name="myDateOnly"
+                            Visible="true"
+                            ReadOnly="false"
+                            PickerAlign="Align.Right"
+                            CalendarType="Calendar.SingleModeMiladi"
+                            InputDigitType="DigitType.BasedOnCalendar"
+                            DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
+                            InitialValueSetOnToday="true"
+                            Placeholder="Select deadline"
+                            CssClass="form-control"
+                            Style="border:1px solid #8a2be2; width:250px; float:right"
+                            Theme="PickerTheme.Blue" />
+</div>
 
 <br />
 <br />
 <br />
 
-<div style="display: flex; flex-direction: row-reverse; border: 1px solid green;justify-content: space-around; padding: 50px">
-    <b> Val1= @_variable1 </b>
-    <b> Val2= @_variable2 </b>
-    <b> Val3= @_variable3 </b>
-    <b> Val4= @_variable4 </b>
+<div style="display: flex; flex-direction: row-reverse; border: 1px solid #ccc;justify-content: space-around; padding: 50px">
+    <b style="color: #0d6efd;"> Val1= @_variable1 </b>
+    <b style="color: purple;"> Val2= @_variable2 </b>
+    <b style="color: blue;"> Val3= @_variable3 </b>
+    <b style="color: green;"> Val4= @_variable4 </b>
+    <b style="color: orange;"> Val5 DateTime= @(_variableDateTime?.ToString("u") ?? "null") </b>
+    <b style="color: #8a2be2;"> Val6 DateOnly= @(_variableDateOnly?.ToString("yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture) ?? "null") </b>
 </div>
 
 @*<label style="float: right; font-size: 25px; font-weight:bold"> @_myComponentPrivateField </label>*@
@@ -116,11 +152,13 @@
     private string _variable2;
     private string _variable3;
     private string _variable4;
+    private DateTime? _variableDateTime;
+    private DateOnly? _variableDateOnly;
     private BookModel Book { get; set; } = new();
 
     protected override void OnInitialized()
     {
-        _variable3 = "۱۴۰۲/۱۱/۱۱";
+        _variable3 = "۱۴۰۴/۰۴/۱۱";
 
         base.OnInitialized();
     }
@@ -130,4 +168,6 @@
         public string Name { get; set; }
     }
 }
+
+
 
