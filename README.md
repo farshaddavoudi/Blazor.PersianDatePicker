@@ -3,6 +3,8 @@
 [![NuGet Version](https://img.shields.io/nuget/v/Blazor.PersianDatePicker.svg?style=flat)](https://www.nuget.org/packages/Blazor.PersianDatePicker/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://raw.githubusercontent.com/farshaddavoudi/Blazor.PersianDatePicker/master/LICENSE)
 
+> ⭐️ If Blazor.PersianDatePicker helps your project, a quick star keeps the component visible and fuels future improvements.
+
 <img src="https://github.com/fericode/Blazor.PersianDatePicker/blob/master/screenshot.png">
 
 ##### 🎈 Optimize design after `v2.0.0` | Mark holidays (optional) after `v3.5.0` — Thanks to [@Mostafa-Moradi](https://github.com/Mostafa-Moradi) for asking [the feature](https://github.com/farshaddavoudi/Blazor.PersianDatePicker/issues/93)
@@ -39,7 +41,10 @@ It is compatible and installable on all .NET 5, .NET 6, .NET 7, .NET 8 and .NET 
        Id="myInputDatePicker" //Optional
 
        // Bind input value to local variable or dto etc
-       @bind-Value="_myComponentField"
+       @bind-Value="_stringVar"
+       // Optional typed binds can be used at the same time: 
+       // @bind-ValueAsDateTime="_dateTimeVar"
+       // @bind-ValueAsDateOnly="_dateOnlyVar"
 
        // Html input element name attribute
        Name="myInputName" //Optional
@@ -118,6 +123,31 @@ It is compatible and installable on all .NET 5, .NET 6, .NET 7, .NET 8 and .NET 
 
 ```
 
+### Bind to `DateTime` / `DateOnly`
+
+In addition to the classic string binding, you can keep your view models strongly typed:
+
+```razor
+<InputPersianDatePicker Id="orderDatePicker"
+                        @bind-ValueAsDateTime="OrderDate"
+                        CalendarType="Calendar.DualModeMiladiDefault" />
+
+<InputPersianDatePicker Id="deadlinePicker"
+                        @bind-ValueAsDateOnly="Deadline"
+                        CalendarType="Calendar.SingleModeJalali" />
+```
+
+```csharp
+@code {
+    private DateTime? OrderDate { get; set; }
+    private DateOnly? Deadline { get; set; }
+}
+```
+
+Mix and match string and typed bindings in the same form depending on how you want to store dates in your domain model. 
+
+> #### 💡 You can even keep all three binds (`@bind-Value`, `@bind-ValueAsDateTime`, `@bind-ValueAsDateOnly`) on the same component. The picker keeps them synchronized, propagating whichever value changes across the other two.
+
 ## Digit Type Configuration
 Using `InputDigitType` and `PickerDigitType` you can decouple the numerals rendered in the textbox from those rendered inside the popup. The default (`DigitType.BasedOnCalendar`) continues to follow the active Jalali/Miladi calendar, but you can now force English or Persian digits explicitly.
 
@@ -172,5 +202,7 @@ Using `InputDigitType` and `PickerDigitType` you can decouple the numerals rende
 
 
 ## Special Thanks:
-  *This project is ported from [pwt.datepicker](https://github.com/babakhani/pwt.datepicker) project with a lot of customizations and optimizations for easy and fast use for Blazor applications. Therefore, I appreciate the great effort of Reza Babakhani @babakhani and all contributors of that project*
+  *This project was originally ported from [pwt.datepicker](https://github.com/babakhani/pwt.datepicker), a jQuery-based datepicker that is now officially deprecated. We're grateful to Reza Babakhani @babakhani and every contributor whose work laid the groundwork for this modern Blazor alternative.*
+
+
 

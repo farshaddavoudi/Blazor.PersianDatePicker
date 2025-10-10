@@ -42,6 +42,15 @@
     public FieldIdentifier FieldIdentifier { get; private set; }
 
     private string? _value;
+    private DateTime? _valueAsDateTime;
+    private DateOnly? _valueAsDateOnly;
+    private bool _isSyncingFromString;
+    private bool _isSyncingFromDateTime;
+    private bool _isSyncingFromDateOnly;
+    private FieldIdentifier? _stringFieldIdentifier;
+    private FieldIdentifier? _dateTimeFieldIdentifier;
+    private FieldIdentifier? _dateOnlyFieldIdentifier;
+    private EditContext? _lastEditContext;
     private bool _isJalaliCurrentCalendarType;
     private DigitType _inputDigitType = DigitType.BasedOnCalendar;
 
@@ -54,12 +63,55 @@
         get => _value;
         set
         {
-            if (!EqualityComparer<string>.Default.Equals(value, _value))
+            if (!EqualityComparer<string?>.Default.Equals(value, _value))
             {
                 _value = value;
+
+                if (!_isSyncingFromDateTime && !_isSyncingFromDateOnly)
+                {
+                    UpdateTypedValuesFromString(value);
+                }
             }
         }
     }
+
+    [Parameter]
+    public DateTime? ValueAsDateTime
+    {
+        get => _valueAsDateTime;
+        set
+        {
+            if (!EqualityComparer<DateTime?>.Default.Equals(value, _valueAsDateTime))
+            {
+                UpdateFromDateTime(value, true);
+            }
+        }
+    }
+
+    [Parameter]
+    public EventCallback<DateTime?> ValueAsDateTimeChanged { get; set; }
+
+    [Parameter]
+    public Expression<Func<DateTime?>>? ValueAsDateTimeExpression { get; set; }
+
+    [Parameter]
+    public DateOnly? ValueAsDateOnly
+    {
+        get => _valueAsDateOnly;
+        set
+        {
+            if (!EqualityComparer<DateOnly?>.Default.Equals(value, _valueAsDateOnly))
+            {
+                UpdateFromDateOnly(value, true);
+            }
+        }
+    }
+
+    [Parameter]
+    public EventCallback<DateOnly?> ValueAsDateOnlyChanged { get; set; }
+
+    [Parameter]
+    public Expression<Func<DateOnly?>>? ValueAsDateOnlyExpression { get; set; }
 
     [Parameter]
     public EventCallback<string> ValueChanged { get; set; }
@@ -256,11 +308,7 @@
         {
             var dt = DateTime.Now;
 
-            _value = _isJalaliCurrentCalendarType
-                ? GetPersianDateFromGregorianDate(dt)
-                : dt.ToString(DateFormat.GetCSharpFormat());
-
-            ModifyValueDigit();
+            UpdateFromDateTime(dt, true);
 
             await OnValueChanged();
         }
@@ -276,10 +324,65 @@
     {
         var result = base.SetParametersAsync(parameters);
 
-        if (EditContext != null && ValueExpression != null && FieldIdentifier.Model != EditContext.Model)
+        if (EditContext != null)
         {
-            FieldIdentifier = FieldIdentifier.Create(ValueExpression);
-            EditContext.OnValidationStateChanged += ValidationStateChanged;
+            if (!ReferenceEquals(EditContext, _lastEditContext))
+            {
+                if (_lastEditContext != null)
+                {
+                    _lastEditContext.OnValidationStateChanged -= ValidationStateChanged;
+                }
+
+                EditContext.OnValidationStateChanged += ValidationStateChanged;
+                _lastEditContext = EditContext;
+            }
+
+            if (ValueExpression != null)
+            {
+                var stringField = FieldIdentifier.Create(ValueExpression);
+                _stringFieldIdentifier = stringField;
+                FieldIdentifier = stringField;
+            }
+            else
+            {
+                _stringFieldIdentifier = null;
+            }
+
+            if (ValueAsDateTimeExpression != null)
+            {
+                var dateTimeField = FieldIdentifier.Create(ValueAsDateTimeExpression);
+                _dateTimeFieldIdentifier = dateTimeField;
+                if (!_stringFieldIdentifier.HasValue)
+                {
+                    FieldIdentifier = dateTimeField;
+                }
+            }
+            else
+            {
+                _dateTimeFieldIdentifier = null;
+            }
+
+            if (ValueAsDateOnlyExpression != null)
+            {
+                var dateOnlyField = FieldIdentifier.Create(ValueAsDateOnlyExpression);
+                _dateOnlyFieldIdentifier = dateOnlyField;
+                if (!_stringFieldIdentifier.HasValue && !_dateTimeFieldIdentifier.HasValue)
+                {
+                    FieldIdentifier = dateOnlyField;
+                }
+            }
+            else
+            {
+                _dateOnlyFieldIdentifier = null;
+            }
+        }
+        else if (_lastEditContext != null)
+        {
+            _lastEditContext.OnValidationStateChanged -= ValidationStateChanged;
+            _lastEditContext = null;
+            _stringFieldIdentifier = null;
+            _dateTimeFieldIdentifier = null;
+            _dateOnlyFieldIdentifier = null;
         }
 
         return result;
@@ -337,12 +440,9 @@
     {
         Value = $"{args.Value}";
 
-        await ValueChanged.InvokeAsync(Value);
-
-        EditContext?.NotifyFieldChanged(FieldIdentifier);
-
-        await OnChange.InvokeAsync(Value);
+        await OnValueChanged();
     }
+
 
     [JSInvokable]
     public async Task SetDate(long? timestamp, string elementId, bool switchingCalendar = false)
@@ -352,40 +452,25 @@
 
         if (timestamp != null)
         {
-            var dt = new DateTime(1970, 1, 1, 0, 0, 0, 0)
-                .AddSeconds(Math.Round((long)timestamp / 1000d)).ToLocalTime();
-
-            _value = _isJalaliCurrentCalendarType
-                ? GetPersianDateFromGregorianDate(dt)
-                : dt.ToString(DateFormat.GetCSharpFormat());
+            var dt = DateTimeOffset.FromUnixTimeMilliseconds((long)timestamp).LocalDateTime;
+            UpdateFromDateTime(dt, true);
         }
 
         if (switchingCalendar)
         {
+            var previousCalendarWasJalali = _isJalaliCurrentCalendarType;
+
             _isJalaliCurrentCalendarType = !_isJalaliCurrentCalendarType;
 
-            if (_isJalaliCurrentCalendarType)
-            {
-                // Change from en to fa: 2021/04/03 => 1400/05/02
-                var dt = Convert.ToDateTime(_value);
+            DateTime? activeDateTime = _valueAsDateTime;
 
-                _value = GetPersianDateFromGregorianDate(dt);
-            }
-            else
+            if (!activeDateTime.HasValue && TryParseComponentValue(_value, out var parsedFromValue, previousCalendarWasJalali))
             {
-                // Change from fa to en: 1400/05/05 => 2021/01/05
-                // Convert to Miladi
-                if (_value != null)
-                {
-                    DateTime dt = DateTime.Parse(_value, new CultureInfo("fa-IR"));
-
-                    // Get Date
-                    _value = dt.ToString(DateFormat.GetCSharpFormat());
-                }
+                activeDateTime = parsedFromValue;
             }
+
+            UpdateFromDateTime(activeDateTime, true);
         }
-
-        ModifyValueDigit();
 
         await OnValueChanged();
     }
@@ -395,14 +480,153 @@
     {
         var dt = DateTime.Today;
 
-        _value = _isJalaliCurrentCalendarType
-            ? GetPersianDateFromGregorianDate(dt)
-            : dt.ToString(DateFormat.GetCSharpFormat());
-
-        ModifyValueDigit();
+        UpdateFromDateTime(dt, true);
 
         await OnValueChanged();
     }
+
+    private void UpdateFromDateTime(DateTime? dateTime, bool updateString)
+    {
+        _isSyncingFromDateTime = true;
+
+        _valueAsDateTime = dateTime;
+        _valueAsDateOnly = dateTime.HasValue ? DateOnly.FromDateTime(dateTime.Value) : null;
+
+        if (updateString)
+        {
+            _value = FormatValueFromDateTime(dateTime);
+            ModifyValueDigit();
+        }
+
+        _isSyncingFromDateTime = false;
+    }
+
+    private void UpdateFromDateOnly(DateOnly? dateOnly, bool updateString)
+    {
+        _isSyncingFromDateOnly = true;
+
+        _valueAsDateOnly = dateOnly;
+
+        DateTime? dateTime = dateOnly?.ToDateTime(TimeOnly.MinValue);
+
+        UpdateFromDateTime(dateTime, updateString);
+
+        _isSyncingFromDateOnly = false;
+    }
+
+    private void UpdateTypedValuesFromString(string? value)
+    {
+        if (_isSyncingFromString)
+        {
+            return;
+        }
+
+        _isSyncingFromString = true;
+
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            UpdateFromDateTime(null, false);
+            _isSyncingFromString = false;
+            return;
+        }
+
+        if (TryParseComponentValue(value, out var parsedDate))
+        {
+            UpdateFromDateTime(parsedDate, false);
+        }
+
+        _isSyncingFromString = false;
+    }
+
+    private string? FormatValueFromDateTime(DateTime? dateTime)
+    {
+        if (!dateTime.HasValue)
+        {
+            return string.Empty;
+        }
+
+        if (_isJalaliCurrentCalendarType)
+        {
+            return GetPersianDateFromGregorianDate(dateTime.Value);
+        }
+
+        var format = DateFormat.GetCSharpFormat() ?? "yyyy/MM/dd";
+        return dateTime.Value.ToString(format, CultureInfo.InvariantCulture);
+    }
+
+    private bool TryParseComponentValue(string? value, out DateTime? parsedDateTime, bool? useJalaliOverride = null)
+    {
+        parsedDateTime = null;
+
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            return false;
+        }
+
+        var sanitized = value.Trim().PersianToEnglishDigits();
+        sanitized = sanitized.Replace('-', '/');
+
+        var parts = sanitized.Split('/', StringSplitOptions.RemoveEmptyEntries);
+        if (parts.Length != 3)
+        {
+            return false;
+        }
+
+        if (!int.TryParse(parts[0], out var year) ||
+            !int.TryParse(parts[1], out var month) ||
+            !int.TryParse(parts[2], out var day))
+        {
+            return false;
+        }
+
+        try
+        {
+            DateTime dateTime;
+            var useJalali = useJalaliOverride ?? _isJalaliCurrentCalendarType;
+
+            if (useJalali)
+            {
+                var persianCalendar = new PersianCalendar();
+                dateTime = persianCalendar.ToDateTime(year, month, day, 0, 0, 0, 0);
+            }
+            else
+            {
+                dateTime = new DateTime(year, month, day);
+            }
+
+            parsedDateTime = DateTime.SpecifyKind(dateTime, DateTimeKind.Unspecified);
+            return true;
+        }
+        catch
+        {
+            parsedDateTime = null;
+            return false;
+        }
+    }
+
+    private void NotifyFieldChanged()
+    {
+        if (EditContext == null)
+        {
+            return;
+        }
+
+        if (_stringFieldIdentifier.HasValue)
+        {
+            EditContext.NotifyFieldChanged(_stringFieldIdentifier.Value);
+        }
+
+        if (_dateTimeFieldIdentifier.HasValue)
+        {
+            EditContext.NotifyFieldChanged(_dateTimeFieldIdentifier.Value);
+        }
+
+        if (_dateOnlyFieldIdentifier.HasValue)
+        {
+            EditContext.NotifyFieldChanged(_dateOnlyFieldIdentifier.Value);
+        }
+    }
+
 
     private static string ToDigitTypeString(DigitType digitType)
     {
@@ -433,8 +657,10 @@
     private async Task OnValueChanged()
     {
         await ValueChanged.InvokeAsync(_value);
+        await ValueAsDateTimeChanged.InvokeAsync(_valueAsDateTime);
+        await ValueAsDateOnlyChanged.InvokeAsync(_valueAsDateOnly);
 
-        EditContext?.NotifyFieldChanged(FieldIdentifier);
+        NotifyFieldChanged();
 
         await OnChange.InvokeAsync(Value);
     }
@@ -448,9 +674,9 @@
 
     private async Task Clear()
     {
-        await ValueChanged.InvokeAsync(string.Empty);
+        Value = string.Empty;
 
-        EditContext?.NotifyFieldChanged(FieldIdentifier);
+        await OnValueChanged();
 
         await OnClear.InvokeAsync();
     }
@@ -517,9 +743,10 @@
         if (!_disposed && disposing)
         {
             // Unsubscribe from EditContext events
-            if (EditContext != null)
+            if (_lastEditContext != null)
             {
-                EditContext.OnValidationStateChanged -= ValidationStateChanged;
+                _lastEditContext.OnValidationStateChanged -= ValidationStateChanged;
+                _lastEditContext = null;
             }
 
             // Dispose DotNetObjectReference to prevent memory leaks
@@ -535,3 +762,11 @@
         }
     }
 }
+
+
+
+
+
+
+
+
