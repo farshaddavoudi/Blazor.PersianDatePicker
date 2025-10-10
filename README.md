@@ -41,8 +41,10 @@ It is compatible and installable on all .NET 5, .NET 6, .NET 7, .NET 8 and .NET 
        Id="myInputDatePicker" //Optional
 
        // Bind input value to local variable or dto etc
-       @bind-Value="_myComponentField"
-       // Optional typed binds can be used at the same time: @bind-ValueAsDateTime / @bind-ValueAsDateOnly
+       @bind-Value="_stringVar"
+       // Optional typed binds can be used at the same time: 
+       // @bind-ValueAsDateTime="_dateTimeVar"
+       // @bind-ValueAsDateOnly="_dateOnlyVar"
 
        // Html input element name attribute
        Name="myInputName" //Optional
@@ -142,7 +144,7 @@ In addition to the classic string binding, you can keep your view models strongl
 }
 ```
 
-Mix and match string and typed bindings in the same form depending on how you want to store dates in your domain model.
+Mix and match string and typed bindings in the same form depending on how you want to store dates in your domain model. You can even keep all three binds (`@bind-Value`, `@bind-ValueAsDateTime`, `@bind-ValueAsDateOnly`) on the same component. The picker keeps them synchronized, propagating whichever value changes across the other two.
 
 ## Digit Type Configuration
 Using `InputDigitType` and `PickerDigitType` you can decouple the numerals rendered in the textbox from those rendered inside the popup. The default (`DigitType.BasedOnCalendar`) continues to follow the active Jalali/Miladi calendar, but you can now force English or Persian digits explicitly.
@@ -199,5 +201,6 @@ Using `InputDigitType` and `PickerDigitType` you can decouple the numerals rende
 
 ## Special Thanks:
   *This project was originally ported from [pwt.datepicker](https://github.com/babakhani/pwt.datepicker), a jQuery-based datepicker that is now officially deprecated. We're grateful to Reza Babakhani @babakhani and every contributor whose work laid the groundwork for this modern Blazor alternative.*
+
 
 
