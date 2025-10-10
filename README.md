@@ -3,7 +3,7 @@
 [![NuGet Version](https://img.shields.io/nuget/v/Blazor.PersianDatePicker.svg?style=flat)](https://www.nuget.org/packages/Blazor.PersianDatePicker/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://raw.githubusercontent.com/farshaddavoudi/Blazor.PersianDatePicker/master/LICENSE)
 
-> **Enjoying Blazor.PersianDatePicker? Please star the repository.** Stars show that the community values a modern, dependency-free Persian date picker and help us prioritize future improvements.
+> ⭐️ If Blazor.PersianDatePicker helps your project, a quick star keeps the component visible and fuels future improvements.
 
 <img src="https://github.com/fericode/Blazor.PersianDatePicker/blob/master/screenshot.png">
 
@@ -42,6 +42,7 @@ It is compatible and installable on all .NET 5, .NET 6, .NET 7, .NET 8 and .NET 
 
        // Bind input value to local variable or dto etc
        @bind-Value="_myComponentField"
+       // Optional typed binds can be used at the same time: @bind-ValueAsDateTime / @bind-ValueAsDateOnly
 
        // Html input element name attribute
        Name="myInputName" //Optional
