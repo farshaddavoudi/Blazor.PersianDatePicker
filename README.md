@@ -144,7 +144,9 @@ In addition to the classic string binding, you can keep your view models strongl
 }
 ```
 
-Mix and match string and typed bindings in the same form depending on how you want to store dates in your domain model. You can even keep all three binds (`@bind-Value`, `@bind-ValueAsDateTime`, `@bind-ValueAsDateOnly`) on the same component. The picker keeps them synchronized, propagating whichever value changes across the other two.
+Mix and match string and typed bindings in the same form depending on how you want to store dates in your domain model. 
+
+> #### 💡 You can even keep all three binds (`@bind-Value`, `@bind-ValueAsDateTime`, `@bind-ValueAsDateOnly`) on the same component. The picker keeps them synchronized, propagating whichever value changes across the other two.
 
 ## Digit Type Configuration
 Using `InputDigitType` and `PickerDigitType` you can decouple the numerals rendered in the textbox from those rendered inside the popup. The default (`DigitType.BasedOnCalendar`) continues to follow the active Jalali/Miladi calendar, but you can now force English or Persian digits explicitly.
