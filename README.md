@@ -4,14 +4,38 @@
 [![NuGet Downloads](https://img.shields.io/nuget/dt/Blazor.PersianDatePicker.svg?style=flat)](https://www.nuget.org/packages/Blazor.PersianDatePicker/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://raw.githubusercontent.com/farshaddavoudi/Blazor.PersianDatePicker/master/LICENSE)
 
-> ⭐️ If Blazor.PersianDatePicker helps your project, a quick star keeps the component visible and fuels future improvements.
+> ?? If Blazor.PersianDatePicker helps your project, a quick star keeps the component visible and fuels future improvements.
 
-<img src="https://github.com/fericode/Blazor.PersianDatePicker/blob/master/screenshot.png">
+<table>
+  <tr>
+    <td align="center">
+      <img src="./screenshot-theme-default.png" alt="Default theme showing the Jalali popup with English digits and dual-mode inputs" width="280"><br>
+      <sub><strong>Default</strong><br>Dual Jalali & Miladi bindings with English digits in the popup.</sub>
+    </td>
+    <td align="center">
+      <img src="./screenshot-theme-slate.png" alt="Slate theme with Jalali popup rendered using Persian digits" width="280"><br>
+      <sub><strong>Slate (Dark)</strong><br>Jalali calendar rendered with Persian digits for fully localized UI.</sub>
+    </td>
+    <td align="center">
+      <img src="./screenshot-theme-midnight.png" alt="Midnight theme with the Miladi calendar highlighted in black" width="280"><br>
+      <sub><strong>Midnight</strong><br>Miladi-only picker with high-contrast focus for late-night dashboards.</sub>
+    </td>
+    <td align="center">
+      <img src="./screenshot-theme-persian.png" alt="Persian RedBlack theme with Jalali digits and accent colors" width="280"><br>
+      <sub><strong>Persian Red/Black</strong><br>Rich accent colors that make holidays and marked dates pop.</sub>
+    </td>
+    <td align="center">
+      <img src="./screenshot-theme-blue.png" alt="Blue theme with Miladi calendar in cool gradients" width="280"><br>
+      <sub><strong>Blue</strong><br>Cool gradient treatment ideal for corporate dashboards.</sub>
+    </td>
+  </tr>
+</table>
 
-##### 🎈 Optimize design after `v2.0.0` | Mark holidays (optional) after `v3.5.0` — Thanks to [@Mostafa-Moradi](https://github.com/Mostafa-Moradi) for asking [the feature](https://github.com/farshaddavoudi/Blazor.PersianDatePicker/issues/93)
+The second sample input in the playground stays disabled, so it does not have a popup screenshot.
 
-<img src="https://github.com/fericode/Blazor.PersianDatePicker/blob/master/screenshot-design-changes.png">
+> ?? Optimize design after `v2.0.0` | Mark holidays (optional) after `v3.5.0` - Thanks to [@Mostafa-Moradi](https://github.com/Mostafa-Moradi) for contributing [the holiday marker upgrade](https://github.com/farshaddavoudi/Blazor.PersianDatePicker/issues/93).
 
+> ?? Holiday cells show up in red (see the screenshots above). Toggle them with `MarkHolidays="true"` or provide your own list via `MarkedDates`.
 > ✨ **Important fix in v3.2.0**: When we set the bound parameter value to some date by code (for example in the `OnInitialize` method of our component) and then click on the input, the selected date in the datepicker was always today, not that date. It is resolved now. Thanks to [@EsmaeelAmarloo](https://github.com/EsmaeelAmarloo) for creating [the issue](https://github.com/farshaddavoudi/Blazor.PersianDatePicker/issues/60#issuecomment-1820790657).
 
 > ✨ **Important fix in v3.4.0 — update your package**: The 1403 Jalali leap year was miscalculated therefore all dates in the next Jalali year (1404) were wrong by one day. It is resolved now. Thanks to [@web724online](https://github.com/web724online) for creating [the issue](https://github.com/farshaddavoudi/Blazor.PersianDatePicker/issues/89).
@@ -195,6 +219,8 @@ Using `InputDigitType` and `PickerDigitType` you can decouple the numerals rende
 
 ## Special Thanks:
 - Inspired by the original [pwt.datepicker](https://github.com/babakhani/pwt.datepicker); thanks to Reza Babakhani and contributors for lighting the path that evolved into today’s Blazor component.
+
+
 
 
 
