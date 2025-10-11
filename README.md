@@ -1,31 +1,31 @@
-# Blazor.PersianDatePicker
+﻿# Blazor.PersianDatePicker
  
 [![NuGet Version](https://img.shields.io/nuget/v/Blazor.PersianDatePicker.svg?style=flat)](https://www.nuget.org/packages/Blazor.PersianDatePicker/)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/Blazor.PersianDatePicker.svg?style=flat)](https://www.nuget.org/packages/Blazor.PersianDatePicker/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://raw.githubusercontent.com/farshaddavoudi/Blazor.PersianDatePicker/master/LICENSE)
 
-> ?? If Blazor.PersianDatePicker helps your project, a quick star keeps the component visible and fuels future improvements.
+> ⭐️ If Blazor.PersianDatePicker helps your project, a quick star keeps the component visible and fuels future improvements.
 
 <table>
   <tr>
     <td align="center">
-      <img src="./screenshot-theme-default.png" alt="Default theme showing the Jalali popup with English digits and dual-mode inputs" width="280"><br>
+      <img src="./images/screenshot-theme-default.png" alt="Default theme showing the Jalali popup with English digits and dual-mode inputs" width="280"><br>
       <sub><strong>Default</strong><br>Dual Jalali & Miladi bindings with English digits in the popup.</sub>
     </td>
     <td align="center">
-      <img src="./screenshot-theme-slate.png" alt="Slate theme with Jalali popup rendered using Persian digits" width="280"><br>
+      <img src="./images/screenshot-theme-slate.png" alt="Slate theme with Jalali popup rendered using Persian digits" width="280"><br>
       <sub><strong>Slate (Dark)</strong><br>Jalali calendar rendered with Persian digits for fully localized UI.</sub>
     </td>
     <td align="center">
-      <img src="./screenshot-theme-midnight.png" alt="Midnight theme with the Miladi calendar highlighted in black" width="280"><br>
+      <img src="./images/screenshot-theme-midnight.png" alt="Midnight theme with the Miladi calendar highlighted in black" width="280"><br>
       <sub><strong>Midnight</strong><br>Miladi-only picker with high-contrast focus for late-night dashboards.</sub>
     </td>
     <td align="center">
-      <img src="./screenshot-theme-persian.png" alt="Persian RedBlack theme with Jalali digits and accent colors" width="280"><br>
+      <img src="./images/screenshot-theme-persian.png" alt="Persian RedBlack theme with Jalali digits and accent colors" width="280"><br>
       <sub><strong>Persian Red/Black</strong><br>Rich accent colors that make holidays and marked dates pop.</sub>
     </td>
     <td align="center">
-      <img src="./screenshot-theme-blue.png" alt="Blue theme with Miladi calendar in cool gradients" width="280"><br>
+      <img src="./images/screenshot-theme-blue.png" alt="Blue theme with Miladi calendar in cool gradients" width="280"><br>
       <sub><strong>Blue</strong><br>Cool gradient treatment ideal for corporate dashboards.</sub>
     </td>
   </tr>
@@ -33,14 +33,14 @@
 
 The second sample input in the playground stays disabled, so it does not have a popup screenshot.
 
-> ?? Optimize design after `v2.0.0` | Mark holidays (optional) after `v3.5.0` - Thanks to [@Mostafa-Moradi](https://github.com/Mostafa-Moradi) for contributing [the holiday marker upgrade](https://github.com/farshaddavoudi/Blazor.PersianDatePicker/issues/93).
+> Update: Optimize design after `v2.0.0` | Mark holidays (optional) after `v3.5.0` - Thanks to [@Mostafa-Moradi](https://github.com/Mostafa-Moradi) for contributing [the holiday marker upgrade](https://github.com/farshaddavoudi/Blazor.PersianDatePicker/issues/93).
 
-> ?? Holiday cells show up in red (see the screenshots above). Toggle them with `MarkHolidays="true"` or provide your own list via `MarkedDates`.
-> ✨ **Important fix in v3.2.0**: When we set the bound parameter value to some date by code (for example in the `OnInitialize` method of our component) and then click on the input, the selected date in the datepicker was always today, not that date. It is resolved now. Thanks to [@EsmaeelAmarloo](https://github.com/EsmaeelAmarloo) for creating [the issue](https://github.com/farshaddavoudi/Blazor.PersianDatePicker/issues/60#issuecomment-1820790657).
+> Holiday spotlight: Holiday cells show up in red (see the screenshots above). Toggle them with `MarkHolidays="true"` or provide your own list via `MarkedDates`.
+> **Important fix in v3.2.0**: When we set the bound parameter value to some date by code (for example in the `OnInitialize` method of our component) and then click on the input, the selected date in the datepicker was always today, not that date. It is resolved now. Thanks to [@EsmaeelAmarloo](https://github.com/EsmaeelAmarloo) for creating [the issue](https://github.com/farshaddavoudi/Blazor.PersianDatePicker/issues/60#issuecomment-1820790657).
 
-> ✨ **Important fix in v3.4.0 — update your package**: The 1403 Jalali leap year was miscalculated therefore all dates in the next Jalali year (1404) were wrong by one day. It is resolved now. Thanks to [@web724online](https://github.com/web724online) for creating [the issue](https://github.com/farshaddavoudi/Blazor.PersianDatePicker/issues/89).
+> **Important fix in v3.4.0 - update your package**: The 1403 Jalali leap year was miscalculated therefore all dates in the next Jalali year (1404) were wrong by one day. It is resolved now. Thanks to [@web724online](https://github.com/web724online) for creating [the issue](https://github.com/farshaddavoudi/Blazor.PersianDatePicker/issues/89).
 
-> ⚠️ **Breaking change in v3.7.0**: The component parameter formerly named `DigitType` is now `InputDigitType`, and a new `PickerDigitType` parameter controls the digits rendered inside the popup. See [Digit Type Configuration](#digit-type-configuration). Thanks to [@AmirJoleini](https://github.com/AmirJoleini) for contributing the improvement.
+> **Breaking change in v3.7.0**: The component parameter formerly named `DigitType` is now `InputDigitType`, and a new `PickerDigitType` parameter controls the digits rendered inside the popup. See [Digit Type Configuration](#digit-type-configuration). Thanks to [@AmirJoleini](https://github.com/AmirJoleini) for contributing the improvement.
 
 
 ## Compatibility:
@@ -171,15 +171,15 @@ In addition to the classic string binding, you can keep your view models strongl
 
 Mix and match string and typed bindings in the same form depending on how you want to store dates in your domain model. 
 
-> #### 💡 You can even keep all three binds (`@bind-Value`, `@bind-ValueAsDateTime`, `@bind-ValueAsDateOnly`) on the same component. The picker keeps them synchronized, propagating whichever value changes across the other two.
+> #### Note: You can even keep all three binds (`@bind-Value`, `@bind-ValueAsDateTime`, `@bind-ValueAsDateOnly`) on the same component. The picker keeps them synchronized, propagating whichever value changes across the other two.
 
 ## Digit Type Configuration
 Using `InputDigitType` and `PickerDigitType` you can decouple the numerals rendered in the textbox from those rendered inside the popup. The default (`DigitType.BasedOnCalendar`) continues to follow the active Jalali/Miladi calendar, but you can now force English or Persian digits explicitly.
 
 <table>
   <tr>
-    <td><img src="./screenshot-picker-digit-type-english.png" alt="Picker showing English digits" width="360"></td>
-    <td><img src="./screenshot-picker-digit-type-persian.png" alt="Picker showing Persian digits" width="360"></td>
+    <td><img src="./images/screenshot-picker-digit-type-english.png" alt="Picker showing English digits" width="360"></td>
+    <td><img src="./images/screenshot-picker-digit-type-persian.png" alt="Picker showing Persian digits" width="360"></td>
   </tr>
   <tr>
     <td align="center"><sub>`PickerDigitType="DigitType.English"`</sub></td>
@@ -189,7 +189,7 @@ Using `InputDigitType` and `PickerDigitType` you can decouple the numerals rende
 
 > **Tip:** Set `InputDigitType="DigitType.English"` while keeping `PickerDigitType="DigitType.Persian"` to show western numerals in the textbox but maintain a localized Jalali calendar grid.
 
-> #### 💡 You can add multi-instances of InputPersianDatePicker components on a page and all of them work independently without any problem
+> #### Note: You can add multi-instances of InputPersianDatePicker components on a page and all of them work independently without any problem
 
 ## Sample template for fast usage:
 #### Copy from here then paste in your project; change some options and you're done.
@@ -218,11 +218,4 @@ Using `InputDigitType` and `PickerDigitType` you can decouple the numerals rende
 ```
 
 ## Special Thanks:
-- Inspired by the original [pwt.datepicker](https://github.com/babakhani/pwt.datepicker); thanks to Reza Babakhani and contributors for lighting the path that evolved into today’s Blazor component.
-
-
-
-
-
-
-
+- Inspired by the original [pwt.datepicker](https://github.com/babakhani/pwt.datepicker); thanks to Reza Babakhani and contributors for lighting the path that evolved into today's Blazor component.

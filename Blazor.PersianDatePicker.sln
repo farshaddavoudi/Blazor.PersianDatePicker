@@ -10,12 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		azure-pipelines.yml = azure-pipelines.yml
 		README.md = README.md
-		screenshot-design-changes.png = screenshot-design-changes.png
-		screenshot-picker-digit-type-english.png = screenshot-picker-digit-type-english.png
-		screenshot-picker-digit-type-persian.png = screenshot-picker-digit-type-persian.png
-		screenshot-show-holidays.png = screenshot-show-holidays.png
-		screenshot.png = screenshot.png
-		screenshot2.png = screenshot2.png
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.PersianDatePicker", "src\Blazor.PersianDatePicker\Blazor.PersianDatePicker.csproj", "{E977240E-62E6-4A4A-84E3-C862A9E30BE1}"
@@ -27,6 +21,21 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorServer", "samples\BlazorServer\BlazorServer.csproj", "{41AE677B-E710-4DB0-B335-86D88955244C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWebAssembly", "samples\BlazorWebAssembly\BlazorWebAssembly.csproj", "{3148CA82-E5BD-4B0D-9F64-6DEFC5586558}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		images\screenshot-design-changes.png = images\screenshot-design-changes.png
+		images\screenshot-picker-digit-type-english.png = images\screenshot-picker-digit-type-english.png
+		images\screenshot-picker-digit-type-persian.png = images\screenshot-picker-digit-type-persian.png
+		images\screenshot-show-holidays.png = images\screenshot-show-holidays.png
+		images\screenshot-theme-blue.png = images\screenshot-theme-blue.png
+		images\screenshot-theme-default.png = images\screenshot-theme-default.png
+		images\screenshot-theme-midnight.png = images\screenshot-theme-midnight.png
+		images\screenshot-theme-persian.png = images\screenshot-theme-persian.png
+		images\screenshot-theme-slate.png = images\screenshot-theme-slate.png
+		images\screenshot.png = images\screenshot.png
+		images\screenshot2.png = images\screenshot2.png
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +64,7 @@ Global
 		{55701F81-7133-41DA-9CE0-45D0F4E41B72} = {B0B391F9-B668-4814-BAE5-1A2EA1AEEB81}
 		{41AE677B-E710-4DB0-B335-86D88955244C} = {58B7F186-4B0A-4525-ACD3-AA317D33B5A0}
 		{3148CA82-E5BD-4B0D-9F64-6DEFC5586558} = {55701F81-7133-41DA-9CE0-45D0F4E41B72}
+		{02EA681E-C7D8-13C7-8484-4AC65E1B71E8} = {42A1C301-1AB0-484F-82A7-A40B47318800}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9FFDD00E-C415-4FD6-95CB-18A9D79B2F32}
