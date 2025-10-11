@@ -193,17 +193,10 @@ Using `InputDigitType` and `PickerDigitType` you can decouple the numerals rende
                         OnChange="@(() => Console.WriteLine("OK"))" />
 ```
 
-## Performance:
-
-   * `js` size (gzipped) ⇒ **35 kb** 
-
-   * `css` size (gzipped) ⇒ **5 kb** 
-
-   * `dll` size (gzipped) ⇒‌ **9 kb** 
-
-
 ## Special Thanks:
-  *This project was originally ported from [pwt.datepicker](https://github.com/babakhani/pwt.datepicker), a jQuery-based datepicker that is now officially deprecated. We're grateful to Reza Babakhani @babakhani and every contributor whose work laid the groundwork for this modern Blazor alternative.*
+- Inspired by the original [pwt.datepicker](https://github.com/babakhani/pwt.datepicker); thanks to Reza Babakhani and contributors for lighting the path that evolved into today’s Blazor component.
+
+
 
 
 
