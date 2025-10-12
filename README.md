@@ -17,10 +17,6 @@
       <sub><strong>Slate (Dark)</strong><br>Jalali calendar rendered with Persian digits for fully localized UI.</sub>
     </td>
     <td align="center">
-      <img src="./images/screenshot-theme-midnight.png" alt="Midnight theme with the Miladi calendar highlighted in black" width="280"><br>
-      <sub><strong>Midnight</strong><br>Miladi-only picker with high-contrast focus for late-night dashboards.</sub>
-    </td>
-    <td align="center">
       <img src="./images/screenshot-theme-persian.png" alt="Persian RedBlack theme with Jalali digits and accent colors" width="280"><br>
       <sub><strong>Persian Red/Black</strong><br>Rich accent colors that make holidays and marked dates pop.</sub>
     </td>
