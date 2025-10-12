@@ -9,32 +9,32 @@
 <table>
   <tr>
     <td align="center">
-      <img src="./images/screenshot-theme-default.png" alt="Default theme showing the Jalali popup with English digits and dual-mode inputs" width="280"><br>
+      <img src="./images/screenshot-theme-default.png" alt="Default theme showing the Jalali popup with English digits and dual-mode inputs" width="230px" height="270px"><br>
       <sub><strong>Default</strong><br>Dual Jalali & Miladi bindings with English digits in the popup.</sub>
     </td>
     <td align="center">
-      <img src="./images/screenshot-theme-slate.png" alt="Slate theme with Jalali popup rendered using Persian digits" width="280"><br>
+      <img src="./images/screenshot-theme-slate.png" alt="Slate theme with Jalali popup rendered using Persian digits" width="230px" height="270px"><br>
       <sub><strong>Slate (Dark)</strong><br>Jalali calendar rendered with Persian digits for fully localized UI.</sub>
     </td>
     <td align="center">
-      <img src="./images/screenshot-theme-persian.png" alt="Persian RedBlack theme with Jalali digits and accent colors" width="280"><br>
+      <img src="./images/screenshot-theme-persian.png" alt="Midnight theme with Jalali digits and accent colors" width="230px" height="270px"><br>
       <sub><strong>Persian Red/Black</strong><br>Rich accent colors that make holidays and marked dates pop.</sub>
     </td>
     <td align="center">
-      <img src="./images/screenshot-theme-blue.png" alt="Blue theme with Miladi calendar in cool gradients" width="280"><br>
+      <img src="./images/screenshot-theme-blue.png" alt="Blue theme with Miladi calendar in cool gradients" width="230px" height="270px"><br>
       <sub><strong>Blue</strong><br>Cool gradient treatment ideal for corporate dashboards.</sub>
     </td>
   </tr>
 </table>
 
-The second sample input in the playground stays disabled, so it does not have a popup screenshot.
+The second sample input in the playground stays disabled, so it does not have a pop-up screenshot.
 
 > Update: Optimize design after `v2.0.0` | Mark holidays (optional) after `v3.5.0` - Thanks to [@Mostafa-Moradi](https://github.com/Mostafa-Moradi) for contributing [the holiday marker upgrade](https://github.com/farshaddavoudi/Blazor.PersianDatePicker/issues/93).
 
 > Holiday spotlight: Holiday cells show up in red (see the screenshots above). Toggle them with `MarkHolidays="true"` or provide your own list via `MarkedDates`.
-> **Important fix in v3.2.0**: When we set the bound parameter value to some date by code (for example in the `OnInitialize` method of our component) and then click on the input, the selected date in the datepicker was always today, not that date. It is resolved now. Thanks to [@EsmaeelAmarloo](https://github.com/EsmaeelAmarloo) for creating [the issue](https://github.com/farshaddavoudi/Blazor.PersianDatePicker/issues/60#issuecomment-1820790657).
+> **Important fix in v3.2.0**: When we set the bound parameter value to some date by code (for example, in the `OnInitialize` method of our component) and then click on the input, the selected date in the datepicker was always today, not that date. It is resolved now. Thanks to [@EsmaeelAmarloo](https://github.com/EsmaeelAmarloo) for creating [the issue](https://github.com/farshaddavoudi/Blazor.PersianDatePicker/issues/60#issuecomment-1820790657).
 
-> **Important fix in v3.4.0 - update your package**: The 1403 Jalali leap year was miscalculated therefore all dates in the next Jalali year (1404) were wrong by one day. It is resolved now. Thanks to [@web724online](https://github.com/web724online) for creating [the issue](https://github.com/farshaddavoudi/Blazor.PersianDatePicker/issues/89).
+> **Important fix in v3.4.0 - update your package**: The 1403 Jalali leap year was miscalculated; therefore, all dates in the next Jalali year (1404) were wrong by one day. It is resolved now. Thanks to [@web724online](https://github.com/web724online) for creating [the issue](https://github.com/farshaddavoudi/Blazor.PersianDatePicker/issues/89).
 
 > **Breaking change in v3.7.0**: The component parameter formerly named `DigitType` is now `InputDigitType`, and a new `PickerDigitType` parameter controls the digits rendered inside the popup. See [Digit Type Configuration](#digit-type-configuration). Thanks to [@AmirJoleini](https://github.com/AmirJoleini) for contributing the improvement.
 
@@ -167,7 +167,7 @@ In addition to the classic string binding, you can keep your view models strongl
 
 Mix and match string and typed bindings in the same form depending on how you want to store dates in your domain model. 
 
-> #### Note: You can even keep all three binds (`@bind-Value`, `@bind-ValueAsDateTime`, `@bind-ValueAsDateOnly`) on the same component. The picker keeps them synchronized, propagating whichever value changes across the other two.
+> #### 💡 You can even keep all three binds (`@bind-Value`, `@bind-ValueAsDateTime`, `@bind-ValueAsDateOnly`) on the same component. The picker keeps them synchronized, propagating whichever value changes across the other two.
 
 ## Digit Type Configuration
 Using `InputDigitType` and `PickerDigitType` you can decouple the numerals rendered in the textbox from those rendered inside the popup. The default (`DigitType.BasedOnCalendar`) continues to follow the active Jalali/Miladi calendar, but you can now force English or Persian digits explicitly.
@@ -183,7 +183,7 @@ Using `InputDigitType` and `PickerDigitType` you can decouple the numerals rende
   </tr>
 </table>
 
-> **Tip:** Set `InputDigitType="DigitType.English"` while keeping `PickerDigitType="DigitType.Persian"` to show western numerals in the textbox but maintain a localized Jalali calendar grid.
+> **💡** Set `InputDigitType="DigitType.English"` while keeping `PickerDigitType="DigitType.Persian"` to show western numerals in the textbox but maintain a localized Jalali calendar grid.
 
 > #### Note: You can add multi-instances of InputPersianDatePicker components on a page and all of them work independently without any problem
 
