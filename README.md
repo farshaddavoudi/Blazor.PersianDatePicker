@@ -18,7 +18,7 @@
     </td>
     <td align="center">
       <img src="./images/screenshot-theme-persian.png" alt="Midnight theme with Jalali digits and accent colors" width="230px" height="270px"><br>
-      <sub><strong>Persian Red/Black</strong><br>Rich accent colors that make holidays and marked dates pop.</sub>
+      <sub><strong>Midnight</strong><br>Rich accent colors that make holidays and marked dates pop.</sub>
     </td>
     <td align="center">
       <img src="./images/screenshot-theme-blue.png" alt="Blue theme with Miladi calendar in cool gradients" width="230px" height="270px"><br>
