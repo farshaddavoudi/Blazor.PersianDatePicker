@@ -4,7 +4,7 @@
 [![NuGet Downloads](https://img.shields.io/nuget/dt/Blazor.PersianDatePicker.svg?style=flat)](https://www.nuget.org/packages/Blazor.PersianDatePicker/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://raw.githubusercontent.com/farshaddavoudi/Blazor.PersianDatePicker/master/LICENSE)
 
-> Tip: If Blazor.PersianDatePicker helps your project, a quick star keeps the component visible and fuels future improvements.
+> 💡 If Blazor.PersianDatePicker helps your project, a quick star keeps the component visible and fuels future improvements.
 
 <table>
   <tr>
@@ -17,12 +17,8 @@
       <sub><strong>Slate (Dark)</strong><br>Jalali calendar rendered with Persian digits for fully localized UI.</sub>
     </td>
     <td align="center">
-      <img src="./images/screenshot-theme-midnight.png" alt="Midnight theme with the Miladi calendar emphasized in a dark palette" width="230" height="270"><br>
-      <sub><strong>Midnight</strong><br>Miladi-focused picker with high-contrast chrome for dashboards.</sub>
-    </td>
-    <td align="center">
-      <img src="./images/screenshot-theme-persian.png" alt="Persian RedBlack theme with Jalali digits and accent colors" width="230" height="270"><br>
-      <sub><strong>Persian Red/Black</strong><br>Rich accents that make holidays and marked dates pop.</sub>
+      <img src="./images/screenshot-theme-persian.png" alt="Midnight theme with Jalali digits and accent colors" width="230" height="270"><br>
+      <sub><strong>Midnight</strong><br>Rich accents that make holidays and marked dates pop.</sub>
     </td>
     <td align="center">
       <img src="./images/screenshot-theme-blue.png" alt="Blue theme with Miladi calendar in cool gradients" width="230" height="270"><br>
@@ -40,8 +36,6 @@
 - Four built-in themes plus calendar icon toggles for the textbox.
 - Flexible picker placement and offset controls to match any layout.
 - Rich date-format options so the picker fits local or domain-specific conventions.
-
-The second sample input in the playground stays disabled, so it does not have a popup screenshot.
 
 > Update: Optimize design after `v2.0.0` | Mark holidays (optional) after `v3.5.0` - Thanks to [@Mostafa-Moradi](https://github.com/Mostafa-Moradi) for contributing [the holiday marker upgrade](https://github.com/farshaddavoudi/Blazor.PersianDatePicker/issues/93).
 
@@ -197,7 +191,7 @@ Using `InputDigitType` and `PickerDigitType` you can decouple the numerals rende
   </tr>
 </table>
 
-> **Tip:** Set `InputDigitType="DigitType.English"` while keeping `PickerDigitType="DigitType.Persian"` to show western numerals in the textbox but maintain a localized Jalali calendar grid.
+> **💡** Set `InputDigitType="DigitType.English"` while keeping `PickerDigitType="DigitType.Persian"` to show western numerals in the textbox but maintain a localized Jalali calendar grid.
 
 > #### Note: You can add multi-instances of InputPersianDatePicker components on a page and all of them work independently without any problem
 
